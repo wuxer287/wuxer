@@ -1,5 +1,34 @@
 # WUXER
 
+## Requisiti
+
+### Requisiti funzionali
+
+| Requisito | Fonte | Funzionalità collegata |
+| :---: | :---: | :---: |
+| Il sistema deve permettere all'utente di registrarsi e accedere con credenziali/OAuth | Utenti | Registrazione/login |
+| Il sistema deve permettere all'utente di modificare le informazioni del profilo | Utenti | Profilo |
+| Il sistema deve permettere all'utente di pubblicare una storia con immagini e testi | Utenti | Pubblicazione storie |
+| Il sistema deve permettere all'utente di pubblicare un post con immagini e descrizione | Utenti | Pubblicazione post |
+| Il sistema deve permettere all'utente di seguire e di smettere di seguire altri profili | Utenti | Follow |
+| Il sistema deve permettere all'utente di mettere like e commentare le storie | Utenti | Interazioni storie |
+
+---
+
+### Requisiti non funzionali
+
+| Requisito | Categoria | Funzionalità collegata |
+| :---: | :---: | :---: |
+| Le credenziali devono essere salvate con hash | Sicurezza | Registrazione/login |
+
+---
+
+### Requisiti di dominio
+
+| Requisito | Origine | Funzionalità collegata |
+| :---: | :---: | :---: |
+| Le storie devono scadere e sparire automaticamente dopo 24 ore | Convenzione social network | Pubblicazione storie |
+
 ## Piano di sviluppo
 
 ### CRITERI
