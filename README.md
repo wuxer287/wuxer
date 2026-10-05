@@ -68,6 +68,13 @@
 | I contenuti generati da AI devono essere chiaramente identificabili come tali | Normativa | Pubblicazione storie, post e video |
 | I vantaggi di un abbonamento sono fruibili dagli abbonati attivi | Regola di business | Abbonamenti creators |
 
+## Analisi SWOT
+
+|  | Positivo | Negativo |
+| :---: | :---: | :---: |
+| Interni | [**Punti di forza**](./docs/swot/STRENGTHS.md) | [**Punti di debolezza**](./docs/swot/WEAKNESSES.md) |
+| Esterni | [**Opportunità**](./docs/swot/OPPORTUNITIES.md) | [**Minacce**](./docs/swot/THREATS.md) |
+
 ## Piano di sviluppo
 
 ### CRITERI
