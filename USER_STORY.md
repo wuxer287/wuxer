@@ -4,29 +4,44 @@ TITOLO: Registrazione/login
 
 USER STORY:
 Come Visitatore,
-Voglio registrarmi e accedere con credenziali o con OAuth,
+Voglio registrarmi e accedere con email e password oppure con Google o Apple,
 In modo da poter usare wuxer con il mio account.
 
 CRITERI DI ACCETTAZIONE:
-- Scenario 1: Registrazione riuscita
-  - DATO che l'utente non ha un account e ha almeno 13 anni
-  - QUANDO l'utente compila il modulo con email, nome utente univoco e password valida
+- Scenario 1: Registrazione con email e password
+  - DATO che l'utente non ha un account
+  - QUANDO l'utente inserisce un'email non ancora registrata e una password valida
   - ALLORA il sistema crea l'account, salva la password con hash e permette l'accesso
 
 - Scenario 2: Registrazione non consentita
-  - DATO che l'utente ha meno di 13 anni oppure il nome utente o l'email sono già in uso
+  - DATO che l'email è già registrata oppure la password non rispetta i requisiti minimi
   - QUANDO l'utente invia il modulo di registrazione
   - ALLORA il sistema rifiuta la registrazione e mostra il motivo
 
-- Scenario 3: Login con credenziali errate
-  - DATO che esiste un account registrato
-  - QUANDO l'utente inserisce una password errata
-  - ALLORA il sistema nega l'accesso con un messaggio generico e, dopo ripetuti tentativi falliti, limita temporaneamente l'accesso
+- Scenario 3: Registrazione bloccata per età
+  - DATO che l'utente ha meno di 13 anni
+  - QUANDO l'utente tenta di registrarsi
+  - ALLORA il sistema blocca la registrazione
 
-- Scenario 4: Accesso con OAuth
-  - DATO che l'utente ha un account presso un provider supportato
-  - QUANDO l'utente sceglie di accedere con OAuth
-  - ALLORA il sistema autentica l'utente e apre il suo account
+- Scenario 4: Accesso con email e password
+  - DATO che l'utente ha un account
+  - QUANDO l'utente inserisce email e password corrette
+  - ALLORA il sistema apre il suo account e mantiene la sessione attiva sul dispositivo
+
+- Scenario 5: Credenziali errate
+  - DATO che l'utente ha un account
+  - QUANDO l'utente inserisce una password errata
+  - ALLORA il sistema nega l'accesso con un messaggio generico
+
+- Scenario 6: Blocco dopo tentativi falliti
+  - DATO che l'utente ha sbagliato la password 3 volte consecutive
+  - QUANDO l'utente tenta un altro accesso
+  - ALLORA il sistema blocca l'accesso per 60 minuti e mostra un avviso
+
+- Scenario 7: Accesso con Google o Apple
+  - DATO che l'utente ha un account Google o Apple
+  - QUANDO l'utente sceglie di accedere con Google o Apple
+  - ALLORA il sistema autentica l'utente tramite il provider e apre il suo account
 
 ---
 
@@ -38,15 +53,35 @@ Voglio modificare le informazioni del mio profilo,
 In modo da presentarmi agli altri utenti come preferisco.
 
 CRITERI DI ACCETTAZIONE:
-- Scenario 1: Modifica riuscita
+- Scenario 1: Modifica di foto e biografia
   - DATO che l'utente ha effettuato l'accesso
-  - QUANDO l'utente modifica foto, nome o biografia e salva
+  - QUANDO l'utente modifica la foto o la biografia e salva
   - ALLORA il sistema salva le modifiche e le mostra subito sul profilo
 
-- Scenario 2: Nome utente già in uso
-  - DATO che l'utente è nella pagina di modifica del profilo
-  - QUANDO l'utente sceglie un nome utente già usato da un altro profilo
+- Scenario 2: Cambio del nome utente
+  - DATO che l'utente ha effettuato l'accesso
+  - QUANDO l'utente sceglie un nuovo nome utente non usato da altri
+  - ALLORA il sistema aggiorna il nome utente
+
+- Scenario 3: Nome utente già in uso
+  - DATO che un altro profilo usa già un certo nome utente
+  - QUANDO l'utente tenta di scegliere quel nome utente
   - ALLORA il sistema rifiuta la modifica e chiede un altro nome utente
+
+- Scenario 4: Visualizzazione di un profilo pubblico
+  - DATO che un profilo è pubblico
+  - QUANDO un utente apre quel profilo
+  - ALLORA il sistema mostra il profilo a tutti
+
+- Scenario 5: Impostazione del profilo come privato
+  - DATO che l'utente ha effettuato l'accesso
+  - QUANDO l'utente imposta il proprio profilo come privato
+  - ALLORA il sistema rende visibili i contenuti del profilo solo ai follower
+
+- Scenario 6: Visualizzazione di un profilo privato da un non follower
+  - DATO che un profilo è privato e l'utente non lo segue
+  - QUANDO l'utente apre quel profilo
+  - ALLORA il sistema non mostra i contenuti del profilo
 
 ---
 
@@ -55,20 +90,40 @@ TITOLO: Pubblicazione storie
 USER STORY:
 Come Utente registrato,
 Voglio pubblicare una storia con immagini e testo,
-In modo da condividere un momento temporaneo con i miei follower.
+In modo da condividere un momento temporaneo.
 
 CRITERI DI ACCETTAZIONE:
 - Scenario 1: Storia pubblicata
   - DATO che l'utente ha effettuato l'accesso
   - QUANDO l'utente carica un'immagine e/o scrive un testo e pubblica
-  - ALLORA il sistema pubblica la storia e la rende visibile ai follower
+  - ALLORA il sistema pubblica la storia
 
-- Scenario 2: Scadenza della storia
+- Scenario 2: Visibilità con profilo pubblico
+  - DATO che il profilo dell'autore è pubblico
+  - QUANDO l'autore pubblica una storia
+  - ALLORA il sistema la rende visibile a tutti
+
+- Scenario 3: Visibilità con profilo privato
+  - DATO che il profilo dell'autore è privato
+  - QUANDO l'autore pubblica una storia
+  - ALLORA il sistema la rende visibile solo ai follower
+
+- Scenario 4: Scadenza della storia
   - DATO che una storia è stata pubblicata da 24 ore
-  - QUANDO l'utente scorrono le 24 ore
-  - ALLORA il sistema il sistema rimuove automaticamente la storia
+  - QUANDO scorrono le 24 ore
+  - ALLORA il sistema rimuove automaticamente la storia dalla visualizzazione degli altri utenti
 
-- Scenario 3: Storia vuota
+- Scenario 5: Archiviazione della storia
+  - DATO che l'autore ha pubblicato una storia
+  - QUANDO l'autore sceglie di archiviarla
+  - ALLORA il sistema la archivia e la rimuove dalla visualizzazione degli altri utenti, come se fosse scaduta
+
+- Scenario 6: Visualizzazioni della storia
+  - DATO che altri utenti hanno visto la storia
+  - QUANDO l'autore apre la propria storia
+  - ALLORA il sistema mostra all'autore chi l'ha vista
+
+- Scenario 7: Storia vuota
   - DATO che l'utente è nella schermata di creazione
   - QUANDO l'utente tenta di pubblicare senza immagine né testo
   - ALLORA il sistema impedisce la pubblicazione e mostra un avviso
@@ -85,13 +140,38 @@ In modo da condividere contenuti duraturi sul mio profilo.
 CRITERI DI ACCETTAZIONE:
 - Scenario 1: Post pubblicato
   - DATO che l'utente ha effettuato l'accesso
-  - QUANDO l'utente carica una o più immagini, scrive la descrizione e pubblica
-  - ALLORA il sistema pubblica il post sul profilo e lo rende disponibile nei feed dei follower
+  - QUANDO l'utente carica da 1 a 50 immagini e pubblica
+  - ALLORA il sistema pubblica il post sul profilo
 
-- Scenario 2: Immagine non valida
+- Scenario 2: Descrizione facoltativa
+  - DATO che l'utente sta creando un post con almeno un'immagine
+  - QUANDO l'utente pubblica senza scrivere la descrizione
+  - ALLORA il sistema pubblica il post senza descrizione
+
+- Scenario 3: Troppe immagini
   - DATO che l'utente sta creando un post
-  - QUANDO l'utente carica un file in un formato non supportato o troppo grande
-  - ALLORA il sistema rifiuta il file e indica i formati e le dimensioni ammessi
+  - QUANDO l'utente tenta di caricare più di 50 immagini
+  - ALLORA il sistema impedisce l'aggiunta e mostra un avviso sul limite
+
+- Scenario 4: Post senza immagini
+  - DATO che l'utente sta creando un post
+  - QUANDO l'utente tenta di pubblicare senza alcuna immagine
+  - ALLORA il sistema impedisce la pubblicazione e mostra un avviso
+
+- Scenario 5: Modifica della descrizione
+  - DATO che l'utente ha pubblicato un post
+  - QUANDO l'utente modifica la descrizione e salva
+  - ALLORA il sistema aggiorna la descrizione, mentre le immagini restano invariate
+
+- Scenario 6: Eliminazione del post
+  - DATO che l'utente ha pubblicato un post
+  - QUANDO l'utente sceglie di eliminarlo e conferma
+  - ALLORA il sistema elimina il post
+
+- Scenario 7: Archiviazione del post
+  - DATO che l'utente ha pubblicato un post
+  - QUANDO l'utente sceglie di archiviarlo
+  - ALLORA il sistema lo archivia e lo rimuove dalla visualizzazione degli altri utenti
 
 ---
 
@@ -99,24 +179,49 @@ TITOLO: Follow
 
 USER STORY:
 Come Utente registrato,
-Voglio seguire e smettere di seguire altri profili,
-In modo da vedere i contenuti dei profili che mi interessano.
+Voglio seguire e smettere di seguire altri profili e rimuovere i miei follower,
+In modo da vedere i contenuti dei profili che mi interessano e controllare chi segue me.
 
 CRITERI DI ACCETTAZIONE:
-- Scenario 1: Seguire un profilo
-  - DATO che l'utente visualizza il profilo di un altro utente che non segue
+- Scenario 1: Seguire un profilo pubblico
+  - DATO che l'utente visualizza un profilo pubblico che non segue
   - QUANDO l'utente preme "Segui"
   - ALLORA il sistema registra il follow e aggiorna subito il conteggio dei follower
 
-- Scenario 2: Smettere di seguire
-  - DATO che l'utente segue già un profilo
-  - QUANDO l'utente preme "Non seguire più"
+- Scenario 2: Richiesta di follow a un profilo privato
+  - DATO che l'utente visualizza un profilo privato che non segue
+  - QUANDO l'utente preme "Segui"
+  - ALLORA il sistema invia una richiesta di follow al proprietario del profilo, senza dare accesso ai contenuti
+
+- Scenario 3: Approvazione della richiesta
+  - DATO che un profilo privato ha ricevuto una richiesta di follow
+  - QUANDO il proprietario approva la richiesta
+  - ALLORA il sistema registra il follow e rende visibili i contenuti al nuovo follower
+
+- Scenario 4: Rifiuto della richiesta
+  - DATO che un profilo privato ha ricevuto una richiesta di follow
+  - QUANDO il proprietario rifiuta la richiesta
+  - ALLORA il sistema elimina la richiesta e non registra il follow
+
+- Scenario 5: Smettere di seguire
+  - DATO che l'utente segue un profilo
+  - QUANDO l'utente sceglie "Non seguire più"
+  - ALLORA il sistema chiede una conferma
+
+- Scenario 6: Conferma di non seguire più
+  - DATO che il sistema ha chiesto la conferma per smettere di seguire
+  - QUANDO l'utente conferma
   - ALLORA il sistema rimuove il follow e i contenuti di quel profilo non compaiono più nel feed
 
-- Scenario 3: Seguire se stessi
+- Scenario 7: Rimozione di un follower
+  - DATO che un altro utente segue il profilo dell'utente
+  - QUANDO l'utente rimuove quel follower
+  - ALLORA il sistema elimina il follow e il follower non vede più i contenuti, se il profilo è privato
+
+- Scenario 8: Seguire se stessi
   - DATO che l'utente visualizza il proprio profilo
   - QUANDO l'utente cerca di seguire se stesso
-  - ALLORA il sistema non offre l'azione o la rifiuta
+  - ALLORA il sistema non offre l'azione
 
 ---
 
@@ -128,20 +233,40 @@ Voglio mettere like e commentare le storie,
 In modo da interagire con chi le pubblica.
 
 CRITERI DI ACCETTAZIONE:
-- Scenario 1: Like e commento
-  - DATO che una storia è visibile e non scaduta
-  - QUANDO l'utente l'utente mette like e scrive un commento
-  - ALLORA il sistema registra il like e il commento e li mostra all'autore
+- Scenario 1: Like a una storia
+  - DATO che l'utente vede una storia non scaduta
+  - QUANDO l'utente mette like
+  - ALLORA il sistema registra il like e lo mostra all'autore
 
-- Scenario 2: Like duplicato
+- Scenario 2: Rimozione del like
   - DATO che l'utente ha già messo like a una storia
   - QUANDO l'utente preme di nuovo il like
-  - ALLORA il sistema rimuove il like senza registrarne uno secondo
+  - ALLORA il sistema rimuove il like senza registrarne un secondo
 
-- Scenario 3: Storia scaduta
-  - DATO che una storia è scaduta
-  - QUANDO l'utente l'utente cerca di interagire con essa
-  - ALLORA il sistema la storia non è più disponibile e non accetta interazioni
+- Scenario 3: Commento a una storia
+  - DATO che l'utente vede una storia non scaduta
+  - QUANDO l'utente scrive un commento fino a 100 caratteri e lo invia
+  - ALLORA il sistema pubblica il commento e lo rende visibile a tutti
+
+- Scenario 4: Risposta a un commento
+  - DATO che una storia ha dei commenti
+  - QUANDO l'utente risponde a un commento
+  - ALLORA il sistema pubblica la risposta sotto quel commento
+
+- Scenario 5: Commento troppo lungo
+  - DATO che l'utente sta scrivendo un commento
+  - QUANDO il testo supera i 100 caratteri
+  - ALLORA il sistema impedisce l'invio e mostra un avviso sul limite
+
+- Scenario 6: Commento vuoto
+  - DATO che l'utente sta commentando una storia
+  - QUANDO l'utente invia un commento senza testo
+  - ALLORA il sistema non pubblica il commento e mostra un avviso
+
+- Scenario 7: Storia scaduta
+  - DATO che una storia è scaduta o è stata archiviata
+  - QUANDO l'utente cerca di interagire con essa
+  - ALLORA il sistema non la mostra e non accetta interazioni
 
 ---
 
@@ -153,20 +278,50 @@ Voglio mettere like e commentare i post,
 In modo da interagire con gli altri utenti.
 
 CRITERI DI ACCETTAZIONE:
-- Scenario 1: Like e commento
-  - DATO che un post è visibile
-  - QUANDO l'utente l'utente mette like e scrive un commento
-  - ALLORA il sistema registra le interazioni e le mostra sotto il post
+- Scenario 1: Like a un post
+  - DATO che l'utente vede un post
+  - QUANDO l'utente mette like
+  - ALLORA il sistema registra il like e il numero di like è visibile a tutti
 
-- Scenario 2: Like duplicato
+- Scenario 2: Rimozione del like
   - DATO che l'utente ha già messo like a un post
   - QUANDO l'utente preme di nuovo il like
-  - ALLORA il sistema rimuove il like senza registrarne uno secondo
+  - ALLORA il sistema rimuove il like senza registrarne un secondo
 
-- Scenario 3: Commento vuoto
-  - DATO che l'utente sta commentando un post
-  - QUANDO l'utente invia un commento senza testo
-  - ALLORA il sistema non pubblica il commento e mostra un avviso
+- Scenario 3: Commento a un post
+  - DATO che l'utente vede un post con i commenti attivi
+  - QUANDO l'utente scrive un commento fino a 100 caratteri e lo invia
+  - ALLORA il sistema pubblica il commento e lo rende visibile a tutti
+
+- Scenario 4: Risposta a un commento
+  - DATO che un post ha dei commenti
+  - QUANDO l'utente risponde a un commento
+  - ALLORA il sistema pubblica la risposta sotto quel commento
+
+- Scenario 5: Like a un commento
+  - DATO che un post ha dei commenti
+  - QUANDO l'utente mette like a un commento
+  - ALLORA il sistema registra il like al commento
+
+- Scenario 6: Eliminazione del proprio commento
+  - DATO che l'utente ha commentato un post
+  - QUANDO l'utente elimina il proprio commento
+  - ALLORA il sistema lo rimuove dal post
+
+- Scenario 7: Eliminazione di un commento da parte dell'autore del post
+  - DATO che un post ha dei commenti di altri utenti
+  - QUANDO l'autore del post elimina uno di questi commenti
+  - ALLORA il sistema rimuove il commento dal post
+
+- Scenario 8: Commenti disattivati
+  - DATO che l'autore ha disattivato i commenti del post
+  - QUANDO un utente apre il post
+  - ALLORA il sistema non permette di commentare
+
+- Scenario 9: Commento troppo lungo o vuoto
+  - DATO che l'utente sta scrivendo un commento
+  - QUANDO il testo supera i 100 caratteri oppure è vuoto
+  - ALLORA il sistema impedisce l'invio e mostra un avviso
 
 ---
 
@@ -174,24 +329,34 @@ TITOLO: Feed
 
 USER STORY:
 Come Utente registrato,
-Voglio vedere un feed con i contenuti degli altri profili in base alle mie interazioni,
+Voglio vedere in una pagina i contenuti di altri profili in base alle mie interazioni,
 In modo da scoprire contenuti che mi interessano.
 
 CRITERI DI ACCETTAZIONE:
-- Scenario 1: Feed personalizzato
+- Scenario 1: Feed in base alle interazioni
   - DATO che l'utente ha effettuato l'accesso e ha già interagito con alcuni contenuti
   - QUANDO l'utente apre il feed
-  - ALLORA il sistema mostra i contenuti ordinati in base alle sue interazioni, caricandoli progressivamente
+  - ALLORA il sistema mostra contenuti di altri profili scelti in base alle sue interazioni
 
-- Scenario 2: Nessuna interazione precedente
-  - DATO che l'utente è nuovo e non ha interazioni
+- Scenario 2: Utente senza interazioni
+  - DATO che l'utente non ha ancora interazioni
   - QUANDO l'utente apre il feed
-  - ALLORA il sistema mostra comunque contenuti di default invece di una pagina vuota
+  - ALLORA il sistema mostra contenuti di carattere generale invece di una pagina vuota
 
-- Scenario 3: Contenuto rimosso
+- Scenario 3: Caricamento progressivo
+  - DATO che l'utente è nel feed
+  - QUANDO l'utente scorre verso il basso
+  - ALLORA il sistema carica altri contenuti a blocchi, mostrati a griglia
+
+- Scenario 4: Contenuto rimosso
   - DATO che un contenuto è stato rimosso dai moderatori
-  - QUANDO l'utente l'utente apre il feed
+  - QUANDO l'utente apre il feed
   - ALLORA il sistema non mostra più quel contenuto
+
+- Scenario 5: Contenuti di profili privati
+  - DATO che un profilo è privato, anche se l'utente lo segue
+  - QUANDO l'utente apre il feed
+  - ALLORA il sistema non mostra mai i contenuti di quel profilo, ma solo quelli dei profili pubblici
 
 ---
 
@@ -199,13 +364,13 @@ TITOLO: Segnalazione dei contenuti
 
 USER STORY:
 Come Utente registrato,
-Voglio segnalare un contenuto, inclusi i messaggi privati ricevuti, indicando un motivo,
-In modo da aiutare a mantenere sicura la community.
+Voglio segnalare storie, post, commenti e messaggi indicando un motivo,
+In modo da contribuire a mantenere sicura la community.
 
 CRITERI DI ACCETTAZIONE:
 - Scenario 1: Segnalazione riuscita
-  - DATO che l'utente sta visualizzando un contenuto inappropriato
-  - QUANDO l'utente sceglie "Segnala" e indica un motivo
+  - DATO che l'utente vede una storia, un post o un commento inappropriato
+  - QUANDO l'utente sceglie "Segnala", indica un motivo e scrive una descrizione libera
   - ALLORA il sistema registra la segnalazione e conferma la ricezione all'utente
 
 - Scenario 2: Segnalazione di un messaggio privato
@@ -213,7 +378,22 @@ CRITERI DI ACCETTAZIONE:
   - QUANDO l'utente segnala quel messaggio
   - ALLORA il sistema invia ai moderatori solo il messaggio segnalato, senza compromettere il resto della chat
 
-- Scenario 3: Motivo mancante
+- Scenario 3: Segnalazioni ripetute
+  - DATO che l'utente ha già segnalato un contenuto
+  - QUANDO l'utente lo segnala di nuovo
+  - ALLORA il sistema registra la nuova segnalazione
+
+- Scenario 4: Esito della segnalazione
+  - DATO che i moderatori hanno esaminato la segnalazione
+  - QUANDO l'esame è concluso
+  - ALLORA il sistema comunica l'esito all'utente che ha segnalato
+
+- Scenario 5: Autore non avvisato
+  - DATO che un contenuto è stato segnalato
+  - QUANDO la segnalazione viene registrata
+  - ALLORA il sistema non avvisa l'autore del contenuto della segnalazione
+
+- Scenario 6: Motivo mancante
   - DATO che l'utente sta compilando una segnalazione
   - QUANDO l'utente la invia senza indicare un motivo
   - ALLORA il sistema non la registra e chiede di indicare un motivo
@@ -230,18 +410,33 @@ In modo da garantire il rispetto delle regole della community.
 CRITERI DI ACCETTAZIONE:
 - Scenario 1: Rimozione di un contenuto
   - DATO che esiste una segnalazione in attesa
-  - QUANDO l'utente il moderatore la esamina e decide di rimuovere il contenuto
+  - QUANDO il moderatore la esamina e decide di rimuovere il contenuto
   - ALLORA il sistema rimuove il contenuto e segna la segnalazione come gestita
 
-- Scenario 2: Segnalazione infondata
-  - DATO che esiste una segnalazione in attesa
-  - QUANDO l'utente il moderatore decide che il contenuto è conforme
-  - ALLORA il sistema chiude la segnalazione e lascia il contenuto visibile
+- Scenario 2: Avviso all'autore
+  - DATO che il moderatore ha rimosso un contenuto
+  - QUANDO la rimozione è completata
+  - ALLORA il sistema avvisa l'autore che il contenuto è stato rimosso
 
-- Scenario 3: Utente non moderatore
+- Scenario 3: Sanzione all'autore
+  - DATO che il moderatore ha rimosso un contenuto
+  - QUANDO la rimozione è completata
+  - ALLORA il sistema registra uno strike a carico dell'autore e applica le sanzioni previste
+
+- Scenario 4: Segnalazione infondata
+  - DATO che esiste una segnalazione in attesa
+  - QUANDO il moderatore decide che il contenuto è conforme
+  - ALLORA il sistema chiude la segnalazione, lascia il contenuto visibile e comunica l'esito a chi ha segnalato
+
+- Scenario 5: Contestazione della decisione
+  - DATO che a un utente è stato rimosso un contenuto
+  - QUANDO l'utente contesta la decisione
+  - ALLORA il sistema registra la contestazione e la sottopone a un nuovo esame
+
+- Scenario 6: Utente non moderatore
   - DATO che l'utente non ha il ruolo di moderatore
-  - QUANDO l'utente cerca di rimuovere un contenuto segnalato
-  - ALLORA il sistema il sistema nega l'azione
+  - QUANDO l'utente tenta di rimuovere un contenuto segnalato
+  - ALLORA il sistema nega l'azione
 
 ---
 
@@ -249,7 +444,7 @@ TITOLO: Impostazione: account
 
 USER STORY:
 Come Utente registrato,
-Voglio modificare email e password e disattivare o eliminare il mio account,
+Voglio modificare email e password, eliminare il mio account e scaricare i miei dati,
 In modo da controllare i miei dati e la mia presenza su wuxer.
 
 CRITERI DI ACCETTAZIONE:
@@ -263,10 +458,35 @@ CRITERI DI ACCETTAZIONE:
   - QUANDO l'utente inserisce una password attuale sbagliata
   - ALLORA il sistema rifiuta la modifica e mostra un errore
 
-- Scenario 3: Eliminazione account
+- Scenario 3: Cambio email
   - DATO che l'utente ha effettuato l'accesso
-  - QUANDO l'utente conferma l'eliminazione del proprio account
-  - ALLORA il sistema elimina l'account e i dati personali associati
+  - QUANDO l'utente inserisce la password attuale e una nuova email
+  - ALLORA il sistema chiede di verificare la nuova email e la aggiorna solo dopo la verifica
+
+- Scenario 4: Verifica dell'email non completata
+  - DATO che l'utente ha chiesto di cambiare email
+  - QUANDO la verifica della nuova email non viene completata
+  - ALLORA il sistema mantiene la vecchia email
+
+- Scenario 5: Eliminazione dell'account
+  - DATO che l'utente ha effettuato l'accesso
+  - QUANDO l'utente chiede di eliminare l'account e conferma con la password
+  - ALLORA il sistema elimina l'account in modo irreversibile e non permette più l'accesso
+
+- Scenario 6: Conservazione dei dati dopo l'eliminazione
+  - DATO che un account è stato eliminato
+  - QUANDO sono passati 180 giorni
+  - ALLORA il sistema elimina definitivamente anche i dati rimasti
+
+- Scenario 7: Conferma dell'eliminazione errata
+  - DATO che l'utente ha chiesto di eliminare l'account
+  - QUANDO l'utente inserisce una password errata
+  - ALLORA il sistema non elimina l'account e mostra un errore
+
+- Scenario 8: Scaricamento dei dati
+  - DATO che l'utente ha effettuato l'accesso
+  - QUANDO l'utente chiede una copia dei propri dati
+  - ALLORA il sistema fornisce all'utente un file con i suoi dati personali
 
 ---
 
@@ -274,19 +494,29 @@ TITOLO: Impostazione: parte legale
 
 USER STORY:
 Come Utente registrato,
-Voglio consultare termini di servizio e informativa sulla privacy,
-In modo da sapere come vengono trattati i miei dati.
+Voglio consultare termini di servizio, informativa sulla privacy e linee guida,
+In modo da sapere come vengono trattati i miei dati e quali regole valgono su wuxer.
 
 CRITERI DI ACCETTAZIONE:
 - Scenario 1: Consultazione dei documenti
   - DATO che l'utente ha effettuato l'accesso
-  - QUANDO l'utente apre la sezione legale delle impostazioni
-  - ALLORA il sistema mostra termini di servizio e informativa sulla privacy
+  - QUANDO l'utente apre la sezione legale
+  - ALLORA il sistema mostra termini di servizio, informativa sulla privacy e linee guida
 
 - Scenario 2: Accettazione alla registrazione
   - DATO che un visitatore sta per registrarsi
-  - QUANDO l'utente tenta di completare la registrazione senza accettare i documenti
-  - ALLORA il sistema impedisce la registrazione finché non accetta
+  - QUANDO il visitatore spunta la casella di accettazione di termini di servizio e informativa sulla privacy
+  - ALLORA il sistema registra l'accettazione e permette di completare la registrazione
+
+- Scenario 3: Registrazione senza accettazione
+  - DATO che un visitatore sta per registrarsi
+  - QUANDO il visitatore tenta di completare la registrazione senza accettare i documenti
+  - ALLORA il sistema impedisce la registrazione e mostra un avviso
+
+- Scenario 4: Aggiornamento dei documenti
+  - DATO che i termini di servizio o l'informativa sulla privacy sono stati aggiornati
+  - QUANDO l'utente accede all'app
+  - ALLORA il sistema chiede di accettare di nuovo i documenti aggiornati prima di proseguire
 
 ---
 

@@ -1,4 +1,4 @@
-# WUXER
+# Wuxer
 
 ## Requisiti
 
@@ -16,7 +16,7 @@
 | Il sistema deve mostrare all'utente un feed con i contenuti degli altri profili in base alle proprie interazioni | Utenti | Feed |
 | Il sistema deve permettere all'utente di segnalare un contenuto inclusi i messaggi privati indicando un motivo | Utenti | Segnalazione dei contenuti |
 | Il sistema deve permettere ai moderatori di esaminare le segnalazioni e di rimuovere i contenuti | Moderatori | Moderazione dei contenuti |
-| Il sistema deve permettere all'utente di modificare email e password, di disattivare o eliminare il proprio account | Utenti | Impostazione: account |
+| Il sistema deve permettere all'utente di modificare email e password, di eliminare il proprio account e scaricare i propri dati | Utenti | Impostazione: account |
 | Il sistema deve rendere consultabili termini di servizio e informativa sulla privacy e richiedere l'accettazione alla registrazione | Utenti | Impostazione: parte legale |
 | Il sistema deve permettere all'utente di inserire hashtag ai post e di visualizzare i post con quell'hashtag | Utenti | Hashtag post |
 | Il sistema deve permettere all'utente di cercare altri profili per nome utente | Utenti | Ricerca account |
