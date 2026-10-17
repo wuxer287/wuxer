@@ -12,7 +12,7 @@
 | Il sistema deve permettere all'utente di pubblicare un post con immagini e descrizione | Utenti | Pubblicazione post |
 | Il sistema deve permettere all'utente di seguire e di smettere di seguire altri profili, richiedere di seguire i profili privati e rimuovere i propri follower | Utenti | Follow |
 | Il sistema deve permettere all'utente di mettere like e commentare le storie | Utenti | Interazioni storie |
-| Il sistema deve permettere all'utente di mettere like e commentare i post | Utenti | Interazioni post |
+| Il sistema deve permettere all'utente di mettere like, commentare e condividere i post | Utenti | Interazioni post |
 | Il sistema deve mostrare all'utente un feed con i contenuti degli altri profili in base alle proprie interazioni | Utenti | Feed |
 | Il sistema deve permettere all'utente di segnalare un contenuto inclusi i messaggi privati indicando un motivo | Utenti | Segnalazione dei contenuti |
 | Il sistema deve permettere all'utente di segnalare un altro profilo indicando un motivo | Utenti | Segnalazione profili |
@@ -33,7 +33,7 @@
 | Il sistema deve mostrare all'utente i contenuti di tendenza in base alle interazioni | Utenti | Visualizzazione tendenza |
 | Il sistema deve permettere all'utente di visualizzare e limitare il tempo di utilizzo dell'app | Utenti | Impostazione: utilizzo del tempo |
 | Il sistema deve permettere all'utente di pubblicare un video con descrizione e hashtag | Utenti | Pubblicazione video |
-| Il sistema deve permettere all'utente di mettere like e commentare i video | Utenti | Interazioni video |
+| Il sistema deve permettere all'utente di mettere like, commentare e condividere i video | Utenti | Interazioni video |
 | Il sistema deve permettere a un creator di sottoscrivere a un abbonamento per ottenere vantaggi | Creators | Abbonamenti creators |
 | Il sistema deve permettere all'utente di attivare, disattivare e configurare le funzionalità AI | Utenti | Impostazione: configurazione AI |
 | Il sistema deve proporre all'utente suggerimenti generati da AI (es. descrizioni, hashtag) nella creazione di post e video | Utenti | Generazione suggerimenti AI nei post e nei video |
@@ -165,3 +165,5 @@
 | Rilevamento automatico dei contenuti AI | Pubblicazione storie, post e video | Alta | Alto | ⬜ |
 | Categorie di utenti per le storie | Pubblicazione storie, Follow | Media | Basso | ⬜ |
 | Video nelle storie | Pubblicazione storie, Pubblicazione video | Alta | Medio | ⬜ |
+| Impostazione: chi può commentare le storie | Interazioni storie | Bassa | Basso | ⬜ |
+| Allegati nelle chat private | Chat private | Media | Alto | ⬜ |

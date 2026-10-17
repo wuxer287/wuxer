@@ -11,7 +11,7 @@ CRITERI DI ACCETTAZIONE:
 - Scenario 1: Registrazione con email e password
   - **DATO** che l'utente non ha un account
   - **QUANDO** l'utente inserisce un'email non ancora registrata e una password valida
-  - **ALLORA** il sistema crea l'account, salva la password con hash e permette l'accesso
+  - **ALLORA** il sistema invia un codice di verifica all'email e, dopo l'inserimento del codice corretto, crea l'account, salva la password con hash e permette l'accesso
 
 - Scenario 2: Registrazione non consentita
   - **DATO** che l'email è già registrata oppure la password non rispetta i requisiti minimi
@@ -48,6 +48,11 @@ CRITERI DI ACCETTAZIONE:
   - **QUANDO** l'utente sceglie di accedere con Google o Apple
   - **ALLORA** il sistema autentica l'utente tramite il provider e apre il suo account
 
+- Scenario 9: Codice di verifica errato
+  - **DATO** che l'utente ha ricevuto il codice di verifica via email
+  - **QUANDO** l'utente inserisce un codice errato o scaduto
+  - **ALLORA** il sistema non crea l'account e permette di richiedere un nuovo codice
+
 ---
 
 TITOLO: Profilo
@@ -58,9 +63,9 @@ USER STORY:
 **In modo da** presentarmi agli altri utenti come preferisco.
 
 CRITERI DI ACCETTAZIONE:
-- Scenario 1: Modifica di foto e biografia
+- Scenario 1: Modifica delle informazioni del profilo
   - **DATO** che l'utente ha effettuato l'accesso
-  - **QUANDO** l'utente modifica la foto o la biografia e salva
+  - **QUANDO** l'utente modifica la foto, il nome visualizzato, la biografia o i link e salva
   - **ALLORA** il sistema salva le modifiche e le mostra subito sul profilo
 
 - Scenario 2: Cambio del nome utente
@@ -87,6 +92,11 @@ CRITERI DI ACCETTAZIONE:
   - **DATO** che un profilo è privato e l'utente non lo segue
   - **QUANDO** l'utente apre quel profilo
   - **ALLORA** il sistema non mostra i contenuti del profilo
+
+- Scenario 7: Limiti non rispettati
+  - **DATO** che l'utente sta modificando il profilo
+  - **QUANDO** l'utente inserisce una biografia di oltre 150 caratteri oppure una foto di oltre 5 MB o non in formato JPG o PNG
+  - **ALLORA** il sistema non salva la modifica e indica il limite superato
 
 ---
 
@@ -145,7 +155,7 @@ USER STORY:
 CRITERI DI ACCETTAZIONE:
 - Scenario 1: Post pubblicato
   - **DATO** che l'utente ha effettuato l'accesso
-  - **QUANDO** l'utente carica da 1 a 50 immagini e pubblica
+  - **QUANDO** l'utente carica da 1 a 50 immagini (ciascuna fino a 10 MB, in JPG, PNG o WebP) e pubblica
   - **ALLORA** il sistema pubblica il post sul profilo
 
 - Scenario 2: Descrizione facoltativa
@@ -177,6 +187,16 @@ CRITERI DI ACCETTAZIONE:
   - **DATO** che l'utente ha pubblicato un post
   - **QUANDO** l'utente sceglie di archiviarlo
   - **ALLORA** il sistema lo archivia e lo rimuove dalla visualizzazione degli altri utenti
+
+- Scenario 8: Ripristino di un post archiviato
+  - **DATO** che l'utente ha archiviato un post
+  - **QUANDO** l'utente lo ripristina
+  - **ALLORA** il sistema lo rende di nuovo visibile agli altri utenti, secondo la visibilità del profilo
+
+- Scenario 9: Limiti non rispettati
+  - **DATO** che l'utente sta creando un post
+  - **QUANDO** l'utente inserisce una descrizione di oltre 2.000 caratteri oppure un'immagine di oltre 10 MB o in un formato non ammesso
+  - **ALLORA** il sistema non pubblica il post e indica il limite superato
 
 ---
 
@@ -279,7 +299,7 @@ TITOLO: Interazioni post
 
 USER STORY:
 **Come** Utente registrato,
-**Voglio** mettere like e commentare i post,
+**Voglio** mettere like, commentare e condividere i post,
 **In modo da** interagire con gli altri utenti.
 
 CRITERI DI ACCETTAZIONE:
@@ -295,7 +315,7 @@ CRITERI DI ACCETTAZIONE:
 
 - Scenario 3: Commento a un post
   - **DATO** che l'utente vede un post con i commenti attivi
-  - **QUANDO** l'utente scrive un commento e lo invia
+  - **QUANDO** l'utente scrive un commento fino a 800 caratteri e lo invia
   - **ALLORA** il sistema pubblica il commento e lo rende visibile a tutti
 
 - Scenario 4: Risposta a un commento
@@ -328,6 +348,16 @@ CRITERI DI ACCETTAZIONE:
   - **QUANDO** l'utente invia un commento senza testo
   - **ALLORA** il sistema impedisce l'invio e mostra un avviso
 
+- Scenario 10: Commento troppo lungo
+  - **DATO** che l'utente sta scrivendo un commento
+  - **QUANDO** il testo supera gli 800 caratteri
+  - **ALLORA** il sistema non lo pubblica e mostra un avviso sul limite
+
+- Scenario 11: Condivisione del post
+  - **DATO** che l'utente vede un post
+  - **QUANDO** l'utente sceglie di condividerlo
+  - **ALLORA** il sistema permette di copiare il link del post o di inviarlo in una chat; il link si apre solo agli utenti con un account e, se il profilo è privato, solo ai follower
+
 ---
 
 TITOLO: Feed
@@ -341,12 +371,12 @@ CRITERI DI ACCETTAZIONE:
 - Scenario 1: Feed in base alle interazioni
   - **DATO** che l'utente ha effettuato l'accesso e ha già interagito con alcuni contenuti
   - **QUANDO** l'utente apre il feed
-  - **ALLORA** il sistema mostra contenuti di altri profili scelti in base alle sue interazioni
+  - **ALLORA** il sistema mostra contenuti di altri profili scelti in base alle sue interazioni, ordinati per rilevanza rispetto alle interazioni e alla data di pubblicazione
 
 - Scenario 2: Utente senza interazioni
   - **DATO** che l'utente non ha ancora interazioni
   - **QUANDO** l'utente apre il feed
-  - **ALLORA** il sistema mostra contenuti di carattere generale invece di una pagina vuota
+  - **ALLORA** il sistema mostra i contenuti più popolari del momento dei profili pubblici invece di una pagina vuota
 
 - Scenario 3: Caricamento progressivo
   - **DATO** che l'utente è nel feed
@@ -375,7 +405,7 @@ USER STORY:
 CRITERI DI ACCETTAZIONE:
 - Scenario 1: Segnalazione riuscita
   - **DATO** che l'utente vede una storia, un post o un commento inappropriato
-  - **QUANDO** l'utente sceglie "Segnala", indica un motivo e scrive una descrizione libera
+  - **QUANDO** l'utente sceglie "Segnala", indica un motivo tra spam, violenza o contenuti pericolosi, molestie, contenuti inappropriati, altro e scrive una descrizione libera
   - **ALLORA** il sistema registra la segnalazione e conferma la ricezione all'utente
 
 - Scenario 2: Segnalazione di un messaggio privato
@@ -461,7 +491,7 @@ CRITERI DI ACCETTAZIONE:
 - Scenario 3: Sanzione all'autore
   - **DATO** che il moderatore ha rimosso un contenuto
   - **QUANDO** la rimozione è completata
-  - **ALLORA** il sistema registra uno strike a carico dell'autore e applica le sanzioni previste
+  - **ALLORA** il sistema registra uno strike a carico dell'autore e, al 3° strike, propone la sospensione dell'account e, al 5°, il ban
 
 - Scenario 4: Segnalazione infondata
   - **DATO** che esiste una segnalazione in attesa
@@ -470,8 +500,8 @@ CRITERI DI ACCETTAZIONE:
 
 - Scenario 5: Contestazione della decisione
   - **DATO** che a un utente è stato rimosso un contenuto
-  - **QUANDO** l'utente contesta la decisione
-  - **ALLORA** il sistema registra la contestazione e la sottopone a un nuovo esame
+  - **QUANDO** l'utente contesta la decisione entro 7 giorni
+  - **ALLORA** il sistema registra la contestazione e la sottopone a un nuovo esame da parte di un moderatore, anche lo stesso della prima decisione, entro 12 ore
 
 - Scenario 6: Utente non moderatore
   - **DATO** che l'utente non ha il ruolo di moderatore
@@ -551,7 +581,7 @@ CRITERI DI ACCETTAZIONE:
 - Scenario 5: Eliminazione dell'account
   - **DATO** che l'utente ha effettuato l'accesso
   - **QUANDO** l'utente chiede di eliminare l'account e conferma con la password
-  - **ALLORA** il sistema elimina l'account in modo irreversibile e non permette più l'accesso
+  - **ALLORA** il sistema elimina l'account in modo irreversibile, non permette più l'accesso e rende subito invisibili agli altri utenti il profilo e i contenuti, conservando i dati per 180 giorni
 
 - Scenario 6: Conservazione dei dati dopo l'eliminazione
   - **DATO** che un account è stato eliminato
@@ -566,7 +596,7 @@ CRITERI DI ACCETTAZIONE:
 - Scenario 8: Scaricamento dei dati
   - **DATO** che l'utente ha effettuato l'accesso
   - **QUANDO** l'utente chiede una copia dei propri dati
-  - **ALLORA** il sistema fornisce all'utente un file con i suoi dati personali
+  - **ALLORA** il sistema invia entro 7 giorni un link via email per scaricare un file ZIP con i suoi dati in JSON e i suoi media
 
 ---
 
@@ -580,7 +610,7 @@ USER STORY:
 CRITERI DI ACCETTAZIONE:
 - Scenario 1: Consultazione dei documenti
   - **DATO** che l'utente ha effettuato l'accesso
-  - **QUANDO** l'utente apre la sezione legale
+  - **QUANDO** l'utente apre la sezione legale nelle impostazioni
   - **ALLORA** il sistema mostra termini di servizio, informativa sulla privacy e linee guida
 
 - Scenario 2: Accettazione alla registrazione
@@ -610,13 +640,13 @@ USER STORY:
 CRITERI DI ACCETTAZIONE:
 - Scenario 1: Hashtag nella descrizione
   - **DATO** che l'utente sta scrivendo la descrizione di un post
-  - **QUANDO** l'utente inserisce nel testo parole precedute da # (ad esempio #vinciamo #contro) e pubblica
+  - **QUANDO** l'utente inserisce nel testo fino a 10 hashtag, cioè parole precedute da # con lettere, numeri e underscore (ad esempio #vinciamo #contro), e pubblica
   - **ALLORA** il sistema riconosce gli hashtag e li rende cliccabili
 
 - Scenario 2: Pagina dell'hashtag
   - **DATO** che esistono post con un certo hashtag
   - **QUANDO** l'utente clicca sull'hashtag
-  - **ALLORA** il sistema mostra i post con quell'hashtag, dal più recente
+  - **ALLORA** il sistema mostra i post di profili pubblici con quell'hashtag, dal più recente
 
 - Scenario 3: Modifica degli hashtag
   - **DATO** che l'utente ha pubblicato un post con degli hashtag
@@ -633,6 +663,11 @@ CRITERI DI ACCETTAZIONE:
   - **QUANDO** l'utente apre la pagina di un hashtag usato in quel post
   - **ALLORA** il sistema non mostra il post
 
+- Scenario 6: Troppi hashtag
+  - **DATO** che l'utente sta scrivendo la descrizione di un post
+  - **QUANDO** l'utente inserisce più di 10 hashtag
+  - **ALLORA** il sistema impedisce la pubblicazione e mostra un avviso sul limite
+
 ---
 
 TITOLO: Ricerca account
@@ -646,7 +681,7 @@ CRITERI DI ACCETTAZIONE:
 - Scenario 1: Ricerca riuscita
   - **DATO** che esiste un profilo con nome utente o nome visualizzato corrispondente
   - **QUANDO** l'utente inserisce il nome nella ricerca
-  - **ALLORA** il sistema mostra i profili corrispondenti, ordinati per somiglianza con il testo cercato
+  - **ALLORA** il sistema mostra 20 profili per volta, con altri caricati scorrendo, ordinati per somiglianza con il testo cercato; a parità di somiglianza compaiono prima i profili seguiti e poi i più popolari
 
 - Scenario 2: Ricerca con testo parziale
   - **DATO** che esiste un profilo con nome utente "mario"
@@ -701,7 +736,7 @@ CRITERI DI ACCETTAZIONE:
 - Scenario 6: Cronologia delle ricerche
   - **DATO** che l'utente ha effettuato delle ricerche
   - **QUANDO** l'utente riapre la ricerca
-  - **ALLORA** il sistema mostra le ricerche recenti, conservate per un periodo limitato
+  - **ALLORA** il sistema mostra le ricerche recenti, conservate per 30 giorni
 
 - Scenario 7: Nessun risultato
   - **DATO** che nessun post corrisponde ai criteri
@@ -906,7 +941,7 @@ CRITERI DI ACCETTAZIONE:
 - Scenario 3: Eliminazione di un proprio messaggio
   - **DATO** che l'utente ha inviato un messaggio
   - **QUANDO** l'utente elimina quel messaggio
-  - **ALLORA** il sistema lo rimuove dalla chat
+  - **ALLORA** il sistema lo rimuove dalla chat di entrambi, senza limite di tempo
 
 - Scenario 4: Eliminazione del messaggio di un altro
   - **DATO** che l'altro utente ha inviato un messaggio
@@ -914,7 +949,7 @@ CRITERI DI ACCETTAZIONE:
   - **ALLORA** il sistema non permette l'eliminazione
 
 - Scenario 5: Impostazioni del destinatario
-  - **DATO** che il destinatario ha impostato di non ricevere messaggi dall'utente
+  - **DATO** che il destinatario ha impostato nelle impostazioni di ricevere messaggi solo dai profili che segue o da nessuno, e non segue l'utente
   - **QUANDO** l'utente tenta di scrivergli
   - **ALLORA** il sistema impedisce l'invio e mostra un avviso
 
@@ -936,10 +971,10 @@ CRITERI DI ACCETTAZIONE:
 - Scenario 1: Contenuti di tendenza
   - **DATO** che esistono post e video con molte interazioni
   - **QUANDO** l'utente apre la sezione tendenza
-  - **ALLORA** il sistema mostra i post e i video più popolari in base alle interazioni
+  - **ALLORA** il sistema mostra i post e i video più popolari in base alle interazioni, dove un like vale 1, un commento 2 e una condivisione 3
 
 - Scenario 2: Periodo di calcolo
-  - **DATO** che la tendenza si calcola sull'ultima settimana o sull'ultimo mese
+  - **DATO** che la tendenza si calcola sull'ultima settimana
   - **QUANDO** l'utente apre la sezione tendenza
   - **ALLORA** il sistema mostra solo contenuti con interazioni in quel periodo
 
@@ -976,7 +1011,7 @@ CRITERI DI ACCETTAZIONE:
 - Scenario 2: Limite predefinito
   - **DATO** che l'utente non ha impostato alcun limite
   - **QUANDO** l'utente usa l'app
-  - **ALLORA** il sistema applica il limite giornaliero predefinito scelto dall'app
+  - **ALLORA** il sistema applica il limite giornaliero predefinito di 2 ore
 
 - Scenario 3: Modifica del limite
   - **DATO** che l'utente apre la sezione utilizzo del tempo
@@ -986,7 +1021,7 @@ CRITERI DI ACCETTAZIONE:
 - Scenario 4: Avvisi al raggiungimento del limite
   - **DATO** che l'utente sta raggiungendo o ha raggiunto il limite giornaliero
   - **QUANDO** il limite viene raggiunto
-  - **ALLORA** il sistema avvisa l'utente per un numero definito di volte
+  - **ALLORA** il sistema avvisa l'utente due volte, all'80% e al 100% del limite
 
 - Scenario 5: Blocco dell'app
   - **DATO** che l'utente ha ricevuto tutti gli avvisi previsti
@@ -996,7 +1031,7 @@ CRITERI DI ACCETTAZIONE:
 - Scenario 6: Tempo aggiuntivo
   - **DATO** che l'app è bloccata per il limite raggiunto
   - **QUANDO** l'utente richiede un tempo aggiuntivo
-  - **ALLORA** il sistema concede il tempo richiesto e poi blocca di nuovo l'app
+  - **ALLORA** il sistema concede 15 minuti in più, richiedibili senza limite di volte, e poi blocca di nuovo l'app
 
 - Scenario 7: Uscita dall'app
   - **DATO** che l'app è bloccata per il limite raggiunto
@@ -1090,7 +1125,7 @@ CRITERI DI ACCETTAZIONE:
 
 - Scenario 3: Video non valido
   - **DATO** che l'utente sta caricando un video
-  - **QUANDO** il file ha un formato non supportato o una dimensione eccessiva
+  - **QUANDO** il file non è in formato MP4 o MOV oppure supera i 200 MB
   - **ALLORA** il sistema rifiuta il file e indica i formati e le dimensioni ammessi
 
 - Scenario 4: Copertina scelta dall'utente
@@ -1140,7 +1175,7 @@ CRITERI DI ACCETTAZIONE:
 
 - Scenario 3: Commento a un video
   - **DATO** che l'utente guarda un video con i commenti attivi
-  - **QUANDO** l'utente scrive un commento e lo invia
+  - **QUANDO** l'utente scrive un commento fino a 800 caratteri e lo invia
   - **ALLORA** il sistema pubblica il commento e lo rende visibile a tutti
 
 - Scenario 4: Risposta e like a un commento
@@ -1166,12 +1201,17 @@ CRITERI DI ACCETTAZIONE:
 - Scenario 8: Condivisione del video
   - **DATO** che l'utente guarda un video che può essere condiviso
   - **QUANDO** l'utente sceglie di condividerlo
-  - **ALLORA** il sistema permette di condividerlo
+  - **ALLORA** il sistema permette di copiare il link del video o di inviarlo in una chat; il link si apre solo agli utenti con un account e, se il profilo è privato, solo ai follower
 
 - Scenario 9: Commento vuoto
   - **DATO** che l'utente sta scrivendo un commento
   - **QUANDO** l'utente invia un commento senza testo
   - **ALLORA** il sistema impedisce l'invio e mostra un avviso
+
+- Scenario 10: Commento troppo lungo
+  - **DATO** che l'utente sta scrivendo un commento
+  - **QUANDO** il testo supera gli 800 caratteri
+  - **ALLORA** il sistema non lo pubblica e mostra un avviso sul limite
 
 ---
 
@@ -1217,6 +1257,16 @@ CRITERI DI ACCETTAZIONE:
   - **DATO** che l'utente ha ricevuto l'avviso di mancato pagamento
   - **QUANDO** passano 48 ore senza che l'utente paghi
   - **ALLORA** il sistema fa decadere l'abbonamento e l'utente perde i vantaggi
+
+- Scenario 8: Cambio di piano
+  - **DATO** che l'utente ha un abbonamento attivo
+  - **QUANDO** l'utente passa a un piano superiore
+  - **ALLORA** il sistema attiva subito il nuovo piano e addebita solo la differenza di prezzo, ad esempio 20 € per passare da wuxer pro (4,99 €) a wuxer max (24,99 €)
+
+- Scenario 9: Nessun rimborso
+  - **DATO** che il rinnovo dell'abbonamento è già stato addebitato
+  - **QUANDO** l'utente chiede un rimborso
+  - **ALLORA** il sistema non rimborsa il rinnovo già addebitato
 
 ---
 
