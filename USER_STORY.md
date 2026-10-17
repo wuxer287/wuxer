@@ -415,7 +415,7 @@ USER STORY:
 CRITERI DI ACCETTAZIONE:
 - Scenario 1: Segnalazione riuscita
   - **DATO** che l'utente visita il profilo di un altro utente
-  - **QUANDO** l'utente sceglie "Segnala profilo", indica un motivo e scrive una descrizione libera
+  - **QUANDO** l'utente sceglie "Segnala profilo", indica un motivo tra spam, profilo falso o furto d'identità, molestie, contenuti inappropriati, altro e scrive una descrizione libera
   - **ALLORA** il sistema registra la segnalazione e conferma la ricezione all'utente
 
 - Scenario 2: Profilo segnalato non avvisato
@@ -489,26 +489,31 @@ USER STORY:
 
 CRITERI DI ACCETTAZIONE:
 - Scenario 1: Sospensione di un account
-  - **DATO** che esiste una segnalazione su un profilo o strike a carico di un utente
-  - **QUANDO** il moderatore sospende l'account
-  - **ALLORA** il sistema impedisce all'utente di accedere all'app e gli comunica il motivo della sospensione
+  - **DATO** che esiste una segnalazione su un profilo oppure l'utente ha raggiunto 3 strike
+  - **QUANDO** il moderatore sospende l'account e sceglie la durata tra 7, 30 e 90 giorni
+  - **ALLORA** il sistema impedisce all'utente di accedere all'app fino alla scadenza e gli comunica il motivo e la durata della sospensione
 
 - Scenario 2: Ban di un account
-  - **DATO** che esiste una violazione grave delle regole
+  - **DATO** che l'utente ha raggiunto 5 strike oppure ha commesso una violazione grave delle regole
   - **QUANDO** il moderatore banna l'account
   - **ALLORA** il sistema impedisce in modo permanente l'accesso all'app e comunica il motivo all'utente
 
-- Scenario 3: Accesso con account sospeso o bannato
+- Scenario 3: Fine della sospensione
+  - **DATO** che l'account dell'utente è sospeso e la durata è scaduta
+  - **QUANDO** l'utente tenta di accedere
+  - **ALLORA** il sistema riattiva l'account e permette l'accesso
+
+- Scenario 4: Accesso con account sospeso o bannato
   - **DATO** che l'account dell'utente è sospeso o bannato
   - **QUANDO** l'utente tenta di accedere
   - **ALLORA** il sistema nega l'accesso e mostra il motivo
 
-- Scenario 4: Sessione già attiva
+- Scenario 5: Sessione già attiva
   - **DATO** che l'utente ha una sessione attiva su un dispositivo
   - **QUANDO** il moderatore sospende o banna il suo account
   - **ALLORA** il sistema termina la sessione e nega ulteriori accessi
 
-- Scenario 5: Utente non moderatore
+- Scenario 6: Utente non moderatore
   - **DATO** che l'utente non ha il ruolo di moderatore
   - **QUANDO** l'utente tenta di sospendere o bannare un account
   - **ALLORA** il sistema nega l'azione
@@ -821,7 +826,7 @@ CRITERI DI ACCETTAZIONE:
 - Scenario 1: Blocco di un utente
   - **DATO** che l'utente visita il profilo di un altro utente
   - **QUANDO** l'utente sceglie "Blocca" e conferma
-  - **ALLORA** il sistema blocca l'utente
+  - **ALLORA** il sistema blocca l'utente, annulla i follow tra i due profili e non avvisa l'utente bloccato
 
 - Scenario 2: Contenuti non visibili
   - **DATO** che l'utente A ha bloccato l'utente B
@@ -831,11 +836,11 @@ CRITERI DI ACCETTAZIONE:
 - Scenario 3: Messaggi non consentiti
   - **DATO** che l'utente A ha bloccato l'utente B
   - **QUANDO** B tenta di scrivere ad A
-  - **ALLORA** il sistema impedisce l'invio dei messaggi
+  - **ALLORA** il sistema impedisce l'invio dei messaggi; la chat esistente resta visibile ma non permette di scrivere
 
 - Scenario 4: Sblocco di un utente
   - **DATO** che l'utente ha bloccato un altro utente
-  - **QUANDO** l'utente lo sblocca dall'elenco dei bloccati
+  - **QUANDO** l'utente lo sblocca dall'elenco dei bloccati nelle impostazioni dell'account
   - **ALLORA** il sistema ripristina la visibilità e la possibilità di scrivere
 
 - Scenario 5: Blocco di se stessi
@@ -856,7 +861,7 @@ CRITERI DI ACCETTAZIONE:
 - Scenario 1: Visualizzazione del feed dei seguiti
   - **DATO** che l'utente segue alcuni profili
   - **QUANDO** l'utente apre il feed dei profili seguiti
-  - **ALLORA** il sistema mostra i contenuti dei soli profili seguiti
+  - **ALLORA** il sistema mostra i post e i video dei soli profili seguiti, in ordine cronologico dal più recente; le storie restano fuori dal feed
 
 - Scenario 2: Contenuti di profili privati
   - **DATO** che l'utente segue un profilo privato con richiesta approvata
