@@ -77,6 +77,7 @@
 | Un utente può mettere un solo like per contenuto | Convenzione social network | Interazioni storie, post e video |
 | I contenuti generati da AI devono essere chiaramente identificabili come tali | Normativa | Pubblicazione storie, post e video |
 | I vantaggi di un abbonamento sono fruibili dagli abbonati attivi | Regola di business | Abbonamenti creators |
+| L'applicazione non deve mostrare pubblicità agli utenti | Regola di business | Tutte |
 
 ## Analisi SWOT
 

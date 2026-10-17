@@ -1,8 +1,22 @@
 # WUXER - Punti di forza
 
-- Team con competenze già consolidate su frontend (HTML/JS/React), backend e database SQL, che coprono l'intero stack necessario
+- Team con competenze su frontend, backend e database SQL, che coprono l'intero stack necessario (tecnologie ancora da scegliere)
 - Funzionalità "Impostazione: utilizzo del tempo" come elemento distintivo rispetto a Instagram, TikTok e X, che non offrono un controllo nativo paragonabile
-- Segnalazione estesa anche ai messaggi privati, con gestione che preserva la crittografia end-to-end del resto della chat
-- Pianificazione a fasi con MVP chiaro (Fase 1), che permette di avere un prodotto funzionante e dimostrabile già dalle prime settimane
-- Documentazione del progetto già strutturata (requisiti, user story, piano di sviluppo), utile sia per lo sviluppo sia per la valutazione scolastica
-- Analisi dei competitor già svolta, che riduce il rischio di progettare funzionalità già superate o poco richieste
+- Chat private con crittografia end-to-end e possibilità di segnalare un singolo messaggio
+- Moderazione su più livelli: segnalazione di contenuti e profili, blocco utenti, sospensione/ban e sanzioni per i contenuti AI non dichiarati
+- Attenzione a privacy e minori: età minima di 14 anni, conformità al GDPR e accessibilità WCAG 2.1 AA già nei requisiti
+- Trasparenza sull'AI: contenuti AI dichiarati dall'utente e suggerimenti AI che non salvano dati utente
+- Pianificazione a fasi con MVP chiaro (Fase 1), che permette di avere un prodotto funzionante e dimostrabile
+- Documentazione del progetto già strutturata (requisiti, 36 funzionalità con user story, piano di sviluppo), utile sia per lo sviluppo sia per la valutazione scolastica
+- # WUXER - Punti di forza
+
+- Team con competenze su frontend, backend e database SQL, che coprono l'intero stack necessario (tecnologie ancora da scegliere)
+- Funzionalità "Impostazione: utilizzo del tempo" (Fase 3) come elemento distintivo rispetto a Instagram, TikTok e X, che non offrono un controllo nativo paragonabile
+- Chat private con crittografia end-to-end e possibilità di segnalare un singolo messaggio
+- Moderazione su più livelli: segnalazione di contenuti e profili, blocco utenti, sospensione/ban e sanzioni per i contenuti AI non dichiarati
+- Attenzione a privacy e minori: età minima di 14 anni, conformità al GDPR e accessibilità WCAG 2.1 AA già nei requisiti
+- Trasparenza sull'AI: contenuti AI dichiarati dall'utente e suggerimenti AI che non salvano dati utente
+- Nessuna pubblicità: il ricavo viene dagli abbonamenti degli utenti (wuxer pro/max), quindi feed e suggerimenti non dipendono da inserzionisti
+- Pianificazione a fasi con MVP chiaro (Fase 1), che permette di avere un prodotto funzionante e dimostrabile
+- Documentazione del progetto già strutturata (requisiti, 36 funzionalità con user story, piano di sviluppo), utile sia per lo sviluppo sia per la valutazione scolastica
+- Nessuna pubblicità: il ricavo viene dagli abbonamenti degli utenti (wuxer pro/max), quindi feed e suggerimenti non dipendono da inserzionisti
