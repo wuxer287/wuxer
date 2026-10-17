@@ -331,12 +331,12 @@ CRITERI DI ACCETTAZIONE:
 - Scenario 6: Eliminazione del proprio commento
   - **DATO** che l'utente ha commentato un post
   - **QUANDO** l'utente elimina il proprio commento
-  - **ALLORA** il sistema lo rimuove dal post
+  - **ALLORA** il sistema lo rimuove dal post; se il commento ha risposte, al suo posto appare "Contenuto eliminato"
 
 - Scenario 7: Eliminazione di un commento da parte dell'autore del post
   - **DATO** che un post ha dei commenti di altri utenti
   - **QUANDO** l'autore del post elimina uno di questi commenti
-  - **ALLORA** il sistema rimuove il commento dal post
+  - **ALLORA** il sistema rimuove il commento dal post; se il commento ha risposte, al suo posto appare "Contenuto eliminato"
 
 - Scenario 8: Commenti disattivati
   - **DATO** che l'autore ha disattivato i commenti del post
@@ -941,7 +941,7 @@ CRITERI DI ACCETTAZIONE:
 - Scenario 3: Eliminazione di un proprio messaggio
   - **DATO** che l'utente ha inviato un messaggio
   - **QUANDO** l'utente elimina quel messaggio
-  - **ALLORA** il sistema lo rimuove dalla chat di entrambi, senza limite di tempo
+  - **ALLORA** il sistema lo rimuove dalla chat di entrambi, senza limite di tempo; al suo posto appare "Messaggio eliminato"
 
 - Scenario 4: Eliminazione del messaggio di un altro
   - **DATO** che l'altro utente ha inviato un messaggio
@@ -1091,7 +1091,7 @@ CRITERI DI ACCETTAZIONE:
 - Scenario 9: Eliminazione di un messaggio
   - **DATO** che l'utente ha inviato un messaggio nel gruppo
   - **QUANDO** l'utente elimina quel messaggio
-  - **ALLORA** il sistema lo rimuove dalla chat, con la stessa regola delle chat private
+  - **ALLORA** il sistema lo rimuove dalla chat, con la stessa regola delle chat private; al suo posto appare "Messaggio eliminato"
 
 - Scenario 10: Gruppo senza partecipanti
   - **DATO** che nel gruppo non è rimasto nessun partecipante
@@ -1186,7 +1186,7 @@ CRITERI DI ACCETTAZIONE:
 - Scenario 5: Eliminazione di un commento
   - **DATO** che un video ha dei commenti
   - **QUANDO** l'autore del commento elimina il proprio commento oppure l'autore del video elimina un commento ricevuto
-  - **ALLORA** il sistema rimuove il commento
+  - **ALLORA** il sistema rimuove il commento; se il commento ha risposte, al suo posto appare "Contenuto eliminato"
 
 - Scenario 6: Commenti disattivati
   - **DATO** che l'autore ha disattivato i commenti del video
@@ -1352,3 +1352,138 @@ CRITERI DI ACCETTAZIONE:
   - **DATO** che l'utente ha richiesto dei suggerimenti
   - **QUANDO** la richiesta è conclusa
   - **ALLORA** il sistema non salva i contenuti elaborati dall'AI
+
+---
+
+TITOLO: Rilevamento automatico dei contenuti AI
+
+USER STORY:
+**Come** Utente registrato,
+**Voglio** che il sistema rilevi se un contenuto pubblicato è stato generato da AI,
+**In modo da** sapere se ciò che guardo è reale o generato.
+
+CRITERI DI ACCETTAZIONE:
+- Scenario 1: Contenuto non rilevato come AI
+  - **DATO** che l'utente pubblica una storia, un post o un video
+  - **QUANDO** il sistema non rileva alcun segno di generazione da AI
+  - **ALLORA** il sistema lo pubblica senza alcuna indicazione
+
+- Scenario 2: Dichiarazione dell'autore
+  - **DATO** che l'autore ha dichiarato il contenuto come generato da AI
+  - **QUANDO** il sistema pubblica il contenuto
+  - **ALLORA** il sistema lo indica come generato da AI anche se il rilevamento non lo ha riconosciuto
+
+- Scenario 3: Rilevamento non disponibile
+  - **DATO** che il servizio di rilevamento non risponde
+  - **QUANDO** l'utente pubblica un contenuto
+  - **ALLORA** il sistema pubblica il contenuto e ripete il rilevamento appena possibile
+
+- Scenario 4: Contenuto AI non dichiarato
+  - **DATO** che l'autore non ha spuntato l'opzione che indica un contenuto generato da AI o che contiene contenuti AI
+  - **QUANDO** il sistema rileva che il contenuto è stato generato da AI o contiene contenuti AI
+  - **ALLORA** il sistema lo indica come generato da AI, avvisa l'autore, registra uno strike a suo carico e applica le sanzioni previste
+
+---
+
+TITOLO: Categorie di utenti per le storie
+
+USER STORY:
+**Come** Utente registrato,
+**Voglio** scegliere quali categorie di utenti possono vedere una mia storia,
+**In modo da** controllare chi vede ciò che pubblico.
+
+CRITERI DI ACCETTAZIONE:
+- Scenario 1: Scelta della categoria
+  - **DATO** che l'utente sta pubblicando una storia
+  - **QUANDO** l'utente sceglie una categoria di utenti (ad esempio tutti o solo i follower) e pubblica
+  - **ALLORA** il sistema mostra la storia solo a quella categoria
+
+- Scenario 2: Utente fuori dalla categoria
+  - **DATO** che una storia è visibile solo a una categoria di utenti
+  - **QUANDO** un utente non appartenente alla categoria cerca di vederla
+  - **ALLORA** il sistema non gliela mostra
+
+- Scenario 3: Categoria predefinita
+  - **DATO** che l'utente non sceglie alcuna categoria
+  - **QUANDO** l'utente pubblica la storia
+  - **ALLORA** il sistema applica la visibilità del profilo, pubblico o privato
+
+---
+
+TITOLO: Video nelle storie
+
+USER STORY:
+**Come** Utente registrato,
+**Voglio** pubblicare una storia con un video,
+**In modo da** condividere momenti temporanei in movimento.
+
+CRITERI DI ACCETTAZIONE:
+- Scenario 1: Storia con video
+  - **DATO** che l'utente ha effettuato l'accesso
+  - **QUANDO** l'utente carica un video e pubblica la storia
+  - **ALLORA** il sistema pubblica la storia con il video
+
+- Scenario 2: Scadenza della storia video
+  - **DATO** che esiste una storia con video
+  - **QUANDO** passano 24 ore dalla pubblicazione
+  - **ALLORA** il sistema la fa sparire come le altre storie
+
+- Scenario 3: Video non valido
+  - **DATO** che l'utente sta caricando un video per una storia
+  - **QUANDO** il file non rispetta durata, formato o dimensione ammessi
+  - **ALLORA** il sistema rifiuta il caricamento e indica i limiti
+
+---
+
+TITOLO: Impostazione: chi può commentare le storie
+
+USER STORY:
+**Come** Utente registrato,
+**Voglio** scegliere chi può commentare le mie storie,
+**In modo da** evitare commenti indesiderati.
+
+CRITERI DI ACCETTAZIONE:
+- Scenario 1: Scelta di chi può commentare
+  - **DATO** che l'utente apre le impostazioni delle storie
+  - **QUANDO** l'utente sceglie chi può commentare (tutti, solo i follower o nessuno) e salva
+  - **ALLORA** il sistema applica la scelta alle sue storie
+
+- Scenario 2: Commento non consentito
+  - **DATO** che l'autore ha limitato i commenti a una categoria
+  - **QUANDO** un utente non autorizzato cerca di commentare la storia
+  - **ALLORA** il sistema non permette di commentare
+
+- Scenario 3: Impostazione predefinita
+  - **DATO** che l'utente non ha cambiato l'impostazione
+  - **QUANDO** un utente vede una sua storia
+  - **ALLORA** il sistema permette di commentare a tutti quelli che la vedono
+
+---
+
+TITOLO: Allegati nelle chat private
+
+USER STORY:
+**Come** Utente registrato,
+**Voglio** inviare immagini e altri allegati nelle chat private,
+**In modo da** comunicare con gli altri utenti in modo più completo.
+
+CRITERI DI ACCETTAZIONE:
+- Scenario 1: Invio di un allegato
+  - **DATO** che l'utente è in una chat privata
+  - **QUANDO** l'utente invia un'immagine o un altro allegato
+  - **ALLORA** il sistema lo cifra end-to-end e lo consegna al destinatario
+
+- Scenario 2: Allegato non valido
+  - **DATO** che l'utente sta inviando un allegato
+  - **QUANDO** il file ha un formato non ammesso o è troppo grande
+  - **ALLORA** il sistema non lo invia e indica i limiti
+
+- Scenario 3: Eliminazione di un allegato
+  - **DATO** che l'utente ha inviato un allegato
+  - **QUANDO** l'utente lo elimina
+  - **ALLORA** il sistema lo rimuove dalla chat di entrambi; al suo posto appare "Messaggio eliminato"
+
+- Scenario 4: Segnalazione di un allegato
+  - **DATO** che l'utente ha ricevuto un allegato inappropriato
+  - **QUANDO** l'utente lo segnala
+  - **ALLORA** il sistema invia ai moderatori solo l'allegato segnalato, senza compromettere il resto della chat

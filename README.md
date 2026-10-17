@@ -37,6 +37,11 @@
 | Il sistema deve permettere a un creator di sottoscrivere a un abbonamento per ottenere vantaggi | Creators | Abbonamenti creators |
 | Il sistema deve permettere all'utente di attivare, disattivare e configurare le funzionalità AI | Utenti | Impostazione: configurazione AI |
 | Il sistema deve proporre all'utente suggerimenti generati da AI (es. descrizioni, hashtag) nella creazione di post e video | Utenti | Generazione suggerimenti AI nei post e nei video |
+| Il sistema deve rilevare automaticamente se un contenuto pubblicato (es. foto, video) è stato generato da AI | Utenti | Rilevamento automatico dei contenuti AI |
+| Il sistema deve permettere all'utente di scegliere quali categorie di utenti possono vedere una storia | Utenti | Categorie di utenti per le storie |
+| Il sistema deve permettere all'utente di pubblicare una storia con video | Utenti | Video nelle storie |
+| Il sistema deve permettere all'utente di scegliere chi può commentare le proprie storie | Utenti | Impostazione: chi può commentare le storie |
+| Il sistema deve permettere a due utenti di scambiarsi immagini e altri allegati nelle chat private | Utenti | Allegati nelle chat private |
 
 ---
 
