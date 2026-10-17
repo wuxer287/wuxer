@@ -28,7 +28,7 @@
 | Il sistema deve permettere all'utente di creare chat di gruppo e di gestirne i partecipanti | Utenti | Chat di gruppo |
 | Il sistema deve mostrare all'utente i contenuti di tendenza in base alle interazioni | Utenti | Visualizzazione tendenza |
 | Il sistema deve permettere all'utente di visualizzare e limitare il tempo di utilizzo dell'app | Utenti | Impostazione: utilizzo del tempo |
-| Il sistema deve permettere all'utente di pubblicare un video con titolo e descrizione | Utenti | Pubblicazione video |
+| Il sistema deve permettere all'utente di pubblicare un video con descrizione e hashtag | Utenti | Pubblicazione video |
 | Il sistema deve permettere all'utente di mettere like e commentare i video | Utenti | Interazioni video |
 | Il sistema deve permettere a un creator di sottoscrivere a un abbonamento per ottenere vantaggi | Creators | Abbonamenti creators |
 | Il sistema deve permettere all'utente di attivare, disattivare e configurare le funzionalità AI | Utenti | Impostazione: configurazione AI |
@@ -146,3 +146,11 @@
 | Abbonamenti creators | Profilo | Alta | Alto | ⬜ |
 | Impostazione: configurazione AI | Impostazione: preferenze | Media | Medio | ⬜ |
 | Generazione suggerimenti AI nei post e nei video | Pubblicazione post/video | Alta | Alto | ⬜ |
+
+---
+
+### Fase 5 - Funzionalità aggiuntive ed opzionali
+
+| Funzionalità | Dipendenze | Complessità | Rischio | Stato avanzamento |
+| :---: | :---: | :---: | :---: | :---: |
+|  |  |  |  |  |
