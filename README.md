@@ -6,24 +6,28 @@
 
 | Requisito | Fonte | Funzionalità collegata |
 | :---: | :---: | :---: |
-| Il sistema deve permettere all'utente di registrarsi e accedere con credenziali/OAuth | Utenti | Registrazione/login |
-| Il sistema deve permettere all'utente di modificare le informazioni del profilo | Utenti | Profilo |
+| Il sistema deve permettere all'utente di registrarsi (indicando anche la data di nascita) e accedere con credenziali/OAuth | Utenti | Registrazione/login |
+| Il sistema deve permettere all'utente di modificare le informazioni del profilo (nome visualizzato, foto, biografia) e di rendere il profilo pubblico o privato | Utenti | Profilo |
 | Il sistema deve permettere all'utente di pubblicare una storia con immagini e testi | Utenti | Pubblicazione storie |
 | Il sistema deve permettere all'utente di pubblicare un post con immagini e descrizione | Utenti | Pubblicazione post |
-| Il sistema deve permettere all'utente di seguire e di smettere di seguire altri profili | Utenti | Follow |
+| Il sistema deve permettere all'utente di seguire e di smettere di seguire altri profili, richiedere di seguire i profili privati e rimuovere i propri follower | Utenti | Follow |
 | Il sistema deve permettere all'utente di mettere like e commentare le storie | Utenti | Interazioni storie |
 | Il sistema deve permettere all'utente di mettere like e commentare i post | Utenti | Interazioni post |
 | Il sistema deve mostrare all'utente un feed con i contenuti degli altri profili in base alle proprie interazioni | Utenti | Feed |
 | Il sistema deve permettere all'utente di segnalare un contenuto inclusi i messaggi privati indicando un motivo | Utenti | Segnalazione dei contenuti |
+| Il sistema deve permettere all'utente di segnalare un altro profilo indicando un motivo | Utenti | Segnalazione profili |
 | Il sistema deve permettere ai moderatori di esaminare le segnalazioni e di rimuovere i contenuti | Moderatori | Moderazione dei contenuti |
+| Il sistema deve permettere ai moderatori di sospendere o bannare un account | Moderatori | Sospensione e ban account |
 | Il sistema deve permettere all'utente di modificare email e password, di eliminare il proprio account e scaricare i propri dati | Utenti | Impostazione: account |
 | Il sistema deve rendere consultabili termini di servizio e informativa sulla privacy e richiedere l'accettazione alla registrazione | Utenti | Impostazione: parte legale |
 | Il sistema deve permettere all'utente di inserire hashtag ai post e di visualizzare i post con quell'hashtag | Utenti | Hashtag post |
-| Il sistema deve permettere all'utente di cercare altri profili per nome utente | Utenti | Ricerca account |
+| Il sistema deve permettere all'utente di cercare altri profili per nome utente o nome visualizzato | Utenti | Ricerca account |
 | Il sistema deve permettere all'utente di cercare i post tramite parole, hashtag e ricerca avanzata (data, keyword) | Utenti | Ricerca post |
 | Il sistema deve permettere all'utente di impostare le proprie preferenze (es. lingua, tema, notifiche) | Utenti | Impostazione: preferenze |
-| Il sistema deve mostrare all'utente le informazioni sull'app e sul proprio account (es. versione, data di registrazione) | Utenti | Impostazione: informazioni app e account |
-| Il sistema deve notificare l'utente di nuovi followers, like, commenti e messaggi | Utenti | Notifiche |
+| Il sistema deve mostrare all'utente le informazioni sull'app e sul proprio account (es. versione, anno di creazione e stato dell'account) | Utenti | Impostazione: informazioni app e account |
+| Il sistema deve notificare l'utente di richieste di follow, nuovi followers, like, commenti, risposte, messaggi, rimozione di un contenuto e messaggi dell'app | Utenti | Notifiche |
+| Il sistema deve permettere all'utente di bloccare un altro utente | Utenti | Blocco utenti |
+| Il sistema deve mostrare all'utente un feed con i contenuti dei soli profili che segue, compresi quelli privati | Utenti | Feed profili seguiti |
 | Il sistema deve permettere a due utenti di scambiarsi messaggi privati | Utenti | Chat private |
 | Il sistema deve permettere all'utente di creare chat di gruppo e di gestirne i partecipanti | Utenti | Chat di gruppo |
 | Il sistema deve mostrare all'utente i contenuti di tendenza in base alle interazioni | Utenti | Visualizzazione tendenza |
@@ -59,11 +63,12 @@
 | Requisito | Origine | Funzionalità collegata |
 | :---: | :---: | :---: |
 | Le storie devono scadere e sparire automaticamente dopo 24 ore | Convenzione social network | Pubblicazione storie |
-| Per registrarsi l'utente deve avere almeno 13 anni (età minima del consenso digitale) | Normativa | Registrazione/login |
+| Per registrarsi l'utente deve avere almeno 14 anni (età minima del consenso digitale in Italia) | Normativa | Registrazione/login |
 | Il nome utente deve essere univoco | Convenzione social network | Profilo |
 | Un utente non può seguire se stesso | Convenzione social network | Follow |
-| Un profilo bloccato o sospeso non può accedere all'applicazione | Politica di moderazione | - |
+| Un profilo bloccato o sospeso non può accedere all'applicazione | Politica di moderazione | Sospensione e ban account |
 | Un contenuto segnalato può essere rimosso solo da un moderatore | Politica di moderazione | Moderazione dei contenuti |
+| Un utente bloccato non può scrivere a chi lo ha bloccato né vederne i contenuti | Convenzione social network | Blocco utenti |
 | Un utente può mettere un solo like per contenuto | Convenzione social network | Interazioni storie, post e video |
 | I contenuti generati da AI devono essere chiaramente identificabili come tali | Normativa | Pubblicazione storie, post e video |
 | I vantaggi di un abbonamento sono fruibili dagli abbonati attivi | Regola di business | Abbonamenti creators |
@@ -107,7 +112,9 @@
 | Interazioni post | Pubblicazione post | Bassa | Medio | ⬜ |
 | Feed | Pubblicazione post | Alta | Medio | ⬜ |
 | Segnalazione dei contenuti | Pubblicazione post | Bassa | Alto | ⬜ |
+| Segnalazione profili | Profilo | Bassa | Alto | ⬜ |
 | Moderazione dei contenuti | Segnalazione dei contenuti | Alta | Alto | ⬜ |
+| Sospensione e ban account | Moderazione dei contenuti, Segnalazione profili | Media | Alto | ⬜ |
 | Impostazione: account | Registrazione/login | Bassa | Medio | ⬜ |
 | Impostazione: parte legale | Registrazione/login | Bassa | Alto | ⬜ |
 
@@ -123,7 +130,9 @@
 | Impostazione: preferenze | Registrazione/login | Bassa | Basso | ⬜ |
 | Impostazione: informazioni app e account | Registrazione/login | Bassa | Basso | ⬜ |
 | Notifiche | Registrazione/login | Media | Basso | ⬜ |
-| Chat private | Profilo, Follow | Alta | Alto | ⬜ |
+| Blocco utenti | Profilo | Bassa | Medio | ⬜ |
+| Feed profili seguiti | Follow, Pubblicazione post | Media | Basso | ⬜ |
+| Chat private | Profilo, Follow, Blocco utenti | Alta | Alto | ⬜ |
 
 ---
 
@@ -153,4 +162,6 @@
 
 | Funzionalità | Dipendenze | Complessità | Rischio | Stato avanzamento |
 | :---: | :---: | :---: | :---: | :---: |
-|  |  |  |  |  |
+| Rilevamento automatico dei contenuti AI | Pubblicazione storie, post e video | Alta | Alto | ⬜ |
+| Categorie di utenti per le storie | Pubblicazione storie, Follow | Media | Basso | ⬜ |
+| Video nelle storie | Pubblicazione storie, Pubblicazione video | Alta | Medio | ⬜ |

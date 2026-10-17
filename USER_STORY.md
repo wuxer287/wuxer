@@ -19,26 +19,31 @@ CRITERI DI ACCETTAZIONE:
   - **ALLORA** il sistema rifiuta la registrazione e mostra il motivo
 
 - Scenario 3: Registrazione bloccata per età
-  - **DATO** che l'utente ha meno di 13 anni
+  - **DATO** che dalla data di nascita indicata l'utente ha meno di 14 anni
   - **QUANDO** l'utente tenta di registrarsi
   - **ALLORA** il sistema blocca la registrazione
 
-- Scenario 4: Accesso con email e password
+- Scenario 4: Data di nascita mancante
+  - **DATO** che l'utente sta compilando la registrazione
+  - **QUANDO** l'utente invia il modulo senza indicare la data di nascita
+  - **ALLORA** il sistema non crea l'account e chiede di indicarla
+
+- Scenario 5: Accesso con email e password
   - **DATO** che l'utente ha un account
   - **QUANDO** l'utente inserisce email e password corrette
   - **ALLORA** il sistema apre il suo account e mantiene la sessione attiva sul dispositivo
 
-- Scenario 5: Credenziali errate
+- Scenario 6: Credenziali errate
   - **DATO** che l'utente ha un account
   - **QUANDO** l'utente inserisce una password errata
   - **ALLORA** il sistema nega l'accesso con un messaggio generico
 
-- Scenario 6: Blocco dopo tentativi falliti
+- Scenario 7: Blocco dopo tentativi falliti
   - **DATO** che l'utente ha sbagliato la password 3 volte consecutive
   - **QUANDO** l'utente tenta un altro accesso
   - **ALLORA** il sistema blocca l'accesso per 60 minuti e mostra un avviso
 
-- Scenario 7: Accesso con Google o Apple
+- Scenario 8: Accesso con Google o Apple
   - **DATO** che l'utente ha un account Google o Apple
   - **QUANDO** l'utente sceglie di accedere con Google o Apple
   - **ALLORA** il sistema autentica l'utente tramite il provider e apre il suo account
@@ -400,6 +405,41 @@ CRITERI DI ACCETTAZIONE:
 
 ---
 
+TITOLO: Segnalazione profili
+
+USER STORY:
+**Come** Utente registrato,
+**Voglio** segnalare un altro profilo indicando un motivo,
+**In modo da** contribuire a mantenere sicura la community.
+
+CRITERI DI ACCETTAZIONE:
+- Scenario 1: Segnalazione riuscita
+  - **DATO** che l'utente visita il profilo di un altro utente
+  - **QUANDO** l'utente sceglie "Segnala profilo", indica un motivo e scrive una descrizione libera
+  - **ALLORA** il sistema registra la segnalazione e conferma la ricezione all'utente
+
+- Scenario 2: Profilo segnalato non avvisato
+  - **DATO** che un profilo è stato segnalato
+  - **QUANDO** la segnalazione viene registrata
+  - **ALLORA** il sistema non avvisa il proprietario del profilo
+
+- Scenario 3: Segnalazione del proprio profilo
+  - **DATO** che l'utente visita il proprio profilo
+  - **QUANDO** l'utente cerca di segnalarlo
+  - **ALLORA** il sistema non offre l'opzione di segnalazione
+
+- Scenario 4: Esito della segnalazione
+  - **DATO** che i moderatori hanno esaminato la segnalazione del profilo
+  - **QUANDO** l'esame è concluso
+  - **ALLORA** il sistema comunica l'esito all'utente che ha segnalato
+
+- Scenario 5: Motivo mancante
+  - **DATO** che l'utente sta compilando la segnalazione di un profilo
+  - **QUANDO** l'utente la invia senza indicare un motivo
+  - **ALLORA** il sistema non la registra e chiede di indicare un motivo
+
+---
+
 TITOLO: Moderazione dei contenuti
 
 USER STORY:
@@ -436,6 +476,41 @@ CRITERI DI ACCETTAZIONE:
 - Scenario 6: Utente non moderatore
   - **DATO** che l'utente non ha il ruolo di moderatore
   - **QUANDO** l'utente tenta di rimuovere un contenuto segnalato
+  - **ALLORA** il sistema nega l'azione
+
+---
+
+TITOLO: Sospensione e ban account
+
+USER STORY:
+**Come** Moderatore,
+**Voglio** sospendere o bannare un account,
+**In modo da** impedire l'uso dell'app a chi viola ripetutamente o gravemente le regole.
+
+CRITERI DI ACCETTAZIONE:
+- Scenario 1: Sospensione di un account
+  - **DATO** che esiste una segnalazione su un profilo o strike a carico di un utente
+  - **QUANDO** il moderatore sospende l'account
+  - **ALLORA** il sistema impedisce all'utente di accedere all'app e gli comunica il motivo della sospensione
+
+- Scenario 2: Ban di un account
+  - **DATO** che esiste una violazione grave delle regole
+  - **QUANDO** il moderatore banna l'account
+  - **ALLORA** il sistema impedisce in modo permanente l'accesso all'app e comunica il motivo all'utente
+
+- Scenario 3: Accesso con account sospeso o bannato
+  - **DATO** che l'account dell'utente è sospeso o bannato
+  - **QUANDO** l'utente tenta di accedere
+  - **ALLORA** il sistema nega l'accesso e mostra il motivo
+
+- Scenario 4: Sessione già attiva
+  - **DATO** che l'utente ha una sessione attiva su un dispositivo
+  - **QUANDO** il moderatore sospende o banna il suo account
+  - **ALLORA** il sistema termina la sessione e nega ulteriori accessi
+
+- Scenario 5: Utente non moderatore
+  - **DATO** che l'utente non ha il ruolo di moderatore
+  - **QUANDO** l'utente tenta di sospendere o bannare un account
   - **ALLORA** il sistema nega l'azione
 
 ---
@@ -732,6 +807,76 @@ CRITERI DI ACCETTAZIONE:
   - **DATO** che una notifica è stata inviata da 180 giorni
   - **QUANDO** scorrono i 180 giorni
   - **ALLORA** il sistema la elimina
+
+---
+
+TITOLO: Blocco utenti
+
+USER STORY:
+**Come** Utente registrato,
+**Voglio** bloccare un altro utente,
+**In modo da** impedirgli di contattarmi e di vedere i miei contenuti.
+
+CRITERI DI ACCETTAZIONE:
+- Scenario 1: Blocco di un utente
+  - **DATO** che l'utente visita il profilo di un altro utente
+  - **QUANDO** l'utente sceglie "Blocca" e conferma
+  - **ALLORA** il sistema blocca l'utente
+
+- Scenario 2: Contenuti non visibili
+  - **DATO** che l'utente A ha bloccato l'utente B
+  - **QUANDO** B cerca il profilo o i contenuti di A
+  - **ALLORA** il sistema non mostra a B i contenuti di A
+
+- Scenario 3: Messaggi non consentiti
+  - **DATO** che l'utente A ha bloccato l'utente B
+  - **QUANDO** B tenta di scrivere ad A
+  - **ALLORA** il sistema impedisce l'invio dei messaggi
+
+- Scenario 4: Sblocco di un utente
+  - **DATO** che l'utente ha bloccato un altro utente
+  - **QUANDO** l'utente lo sblocca dall'elenco dei bloccati
+  - **ALLORA** il sistema ripristina la visibilità e la possibilità di scrivere
+
+- Scenario 5: Blocco di se stessi
+  - **DATO** che l'utente visita il proprio profilo
+  - **QUANDO** l'utente cerca di bloccarsi
+  - **ALLORA** il sistema non offre l'opzione di blocco
+
+---
+
+TITOLO: Feed profili seguiti
+
+USER STORY:
+**Come** Utente registrato,
+**Voglio** vedere un feed con i soli contenuti dei profili che seguo, compresi quelli privati,
+**In modo da** non perdere i contenuti delle persone a cui sono interessato.
+
+CRITERI DI ACCETTAZIONE:
+- Scenario 1: Visualizzazione del feed dei seguiti
+  - **DATO** che l'utente segue alcuni profili
+  - **QUANDO** l'utente apre il feed dei profili seguiti
+  - **ALLORA** il sistema mostra i contenuti dei soli profili seguiti
+
+- Scenario 2: Contenuti di profili privati
+  - **DATO** che l'utente segue un profilo privato con richiesta approvata
+  - **QUANDO** l'utente apre il feed dei profili seguiti
+  - **ALLORA** il sistema include anche i contenuti di quel profilo
+
+- Scenario 3: Interruzione del follow
+  - **DATO** che l'utente smette di seguire un profilo
+  - **QUANDO** l'utente riapre il feed dei profili seguiti
+  - **ALLORA** il sistema non mostra più i contenuti di quel profilo
+
+- Scenario 4: Profili bloccati
+  - **DATO** che l'utente ha bloccato un profilo che seguiva
+  - **QUANDO** l'utente apre il feed dei profili seguiti
+  - **ALLORA** il sistema non mostra i contenuti di quel profilo
+
+- Scenario 5: Nessun profilo seguito
+  - **DATO** che l'utente non segue nessun profilo
+  - **QUANDO** l'utente apre il feed dei profili seguiti
+  - **ALLORA** il sistema mostra un messaggio che invita a seguire dei profili
 
 ---
 
