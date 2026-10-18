@@ -1,0 +1,289 @@
+\documentclass[10pt,multi=tikzpicture,border=12pt]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,positioning,arrows.meta,fit,backgrounds,calc}
+
+% --- stili -----------------------------------------------------------
+\tikzset{
+  uc/.style={ellipse,draw,thick,fill=blue!6,minimum width=6.4cm,minimum height=0.95cm,
+             align=center,font=\small,inner sep=2pt},
+  ucopt/.style={uc,fill=gray!30},
+  sys/.style={draw,thick,inner sep=6mm},
+  assoc/.style={thick},
+  gen/.style={-{Triangle[open,length=3mm,width=3mm]},thick},
+  ext/.style={-{Stealth[length=2.5mm]},dashed,thick},
+}
+% attore stilizzato: \attore{nodo}{posizione}{testo}
+\newcommand{\attore}[3]{%
+  \node[draw=none,fill=none,inner sep=0pt] (#1) at (#2) {%
+    \begin{tikzpicture}[scale=0.55,thick]
+      \draw (0,0.9) circle (0.22);
+      \draw (0,0.68)--(0,0.1) (-0.35,0.5)--(0.35,0.5)
+            (0,0.1)--(-0.28,-0.5) (0,0.1)--(0.28,-0.5);
+    \end{tikzpicture}};
+  \node[font=\small\bfseries,align=center,below=1pt of #1] (#1lab) {#3};}
+\newcommand{\legenda}{%
+  \node[uc,minimum width=3.2cm,minimum height=0.7cm,font=\scriptsize,anchor=south west] at (current page.south west)
+       {};}
+
+\begin{document}
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \tikzset{desc/.style={align=center,font=\small,text width=5.6cm,anchor=south}}
+  \node[font=\Large\bfseries] at (0,6.2) {wuxer --- Attori};
+  \attore{vis}{-7,2}{Visitatore}
+  \attore{ute}{0,2}{Utente registrato}
+  \attore{sis}{7,2}{Sistema}
+  \attore{cre}{-3.6,-3.2}{Creator}
+  \attore{mod}{3.6,-3.2}{Moderatore}
+  \node[desc] at (-7,3.4) {Chi non ha un account: vede solo homepage e login e pu\`o registrarsi.};
+  \node[desc] at (0,3.4) {Usa tutte le funzionalit\`a social.};
+  \node[desc] at (7,3.4) {Attore non umano: rileva i contenuti generati da AI.};
+  \node[desc,anchor=north] at (-3.6,-4.9) {Utente con un abbonamento \textit{wuxer pro} o \textit{wuxer max}, venduto da wuxer.};
+  \node[desc,anchor=north] at (3.6,-4.9) {Nominato dall'amministratore dell'app: esamina segnalazioni e sanziona.};
+  \draw[gen] (cre.north) -- ++(0,1.0) -| (0,0.55);
+  \draw[gen] (mod.north) -- ++(0,1.0) -| (0,0.55);
+\end{tikzpicture}
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \tikzset{uc/.append style={minimum width=6cm,text width=5.5cm,minimum height=0.85cm,font=\scriptsize}}
+  \node[uc] (o0_0) at (0,0.0) {Registrazione/login};
+  \node[uc] (o0_1) at (0,-1.1) {Impostazione: parte legale};
+  \node[uc] (o0_2) at (0,-2.2) {Impostazione: account};
+  \node[uc] (o0_3) at (0,-3.3000000000000003) {Impostazione: preferenze};
+  \node[uc] (o0_4) at (0,-4.4) {Impostazione: informazioni app e account};
+  \node[uc] (o0_5) at (0,-5.5) {Impostazione: utilizzo del tempo};
+  \node[uc] (o0_6) at (0,-6.6000000000000005) {Impostazione: configurazione AI};
+  \begin{scope}[on background layer]
+  \node[sys,inner sep=4mm,fit=(o0_0) (o0_1) (o0_2) (o0_3) (o0_4) (o0_5) (o0_6)] (b0) {};
+  \end{scope}
+  \node[font=\small\bfseries,anchor=south] at ($(b0.north)+(0,0.1)$) {Account, impostazioni e accesso};
+  \node[uc] (o1_0) at (9.3,0.0) {Profilo};
+  \node[uc] (o1_1) at (9.3,-1.1) {Follow};
+  \node[uc] (o1_2) at (9.3,-2.2) {Blocco utenti};
+  \node[uc] (o1_3) at (9.3,-3.3000000000000003) {Ricerca account};
+  \begin{scope}[on background layer]
+  \node[sys,inner sep=4mm,fit=(o1_0) (o1_1) (o1_2) (o1_3)] (b1) {};
+  \end{scope}
+  \node[font=\small\bfseries,anchor=south] at ($(b1.north)+(0,0.1)$) {Profilo e relazioni tra utenti};
+  \node[uc] (o2_0) at (18.6,0.0) {Pubblicazione storie};
+  \node[uc] (o2_1) at (18.6,-1.1) {Interazioni storie};
+  \node[ucopt] (o2_2) at (18.6,-2.2) {Categorie di utenti per le storie};
+  \node[ucopt] (o2_3) at (18.6,-3.3000000000000003) {Video nelle storie};
+  \node[ucopt] (o2_4) at (18.6,-4.4) {Impostazione: chi può commentare le storie};
+  \begin{scope}[on background layer]
+  \node[sys,inner sep=4mm,fit=(o2_0) (o2_1) (o2_2) (o2_3) (o2_4)] (b2) {};
+  \end{scope}
+  \node[font=\small\bfseries,anchor=south] at ($(b2.north)+(0,0.1)$) {Contenuti: storie};
+  \node[uc] (o3_0) at (27.9,0.0) {Pubblicazione post};
+  \node[uc] (o3_1) at (27.9,-1.1) {Interazioni post};
+  \node[uc] (o3_2) at (27.9,-2.2) {Hashtag post};
+  \node[uc] (o3_3) at (27.9,-3.3000000000000003) {Ricerca post};
+  \node[uc] (o3_4) at (27.9,-4.4) {Generazione suggerimenti AI nei post e nei video};
+  \node[uc] (o3_5) at (27.9,-5.5) {Pubblicazione video};
+  \node[uc] (o3_6) at (27.9,-6.6000000000000005) {Interazioni video};
+  \begin{scope}[on background layer]
+  \node[sys,inner sep=4mm,fit=(o3_0) (o3_1) (o3_2) (o3_3) (o3_4) (o3_5) (o3_6)] (b3) {};
+  \end{scope}
+  \node[font=\small\bfseries,anchor=south] at ($(b3.north)+(0,0.1)$) {Contenuti: post e video};
+  \node[uc] (o4_0) at (0,-12.6) {Feed};
+  \node[uc] (o4_1) at (0,-13.7) {Feed profili seguiti};
+  \node[uc] (o4_2) at (0,-14.8) {Visualizzazione tendenza};
+  \node[uc] (o4_3) at (0,-15.9) {Notifiche};
+  \begin{scope}[on background layer]
+  \node[sys,inner sep=4mm,fit=(o4_0) (o4_1) (o4_2) (o4_3)] (b4) {};
+  \end{scope}
+  \node[font=\small\bfseries,anchor=south] at ($(b4.north)+(0,0.1)$) {Feed, tendenze e notifiche};
+  \node[uc] (o5_0) at (9.3,-12.6) {Chat private};
+  \node[uc] (o5_1) at (9.3,-13.7) {Chat di gruppo};
+  \node[ucopt] (o5_2) at (9.3,-14.8) {Allegati nelle chat private};
+  \begin{scope}[on background layer]
+  \node[sys,inner sep=4mm,fit=(o5_0) (o5_1) (o5_2)] (b5) {};
+  \end{scope}
+  \node[font=\small\bfseries,anchor=south] at ($(b5.north)+(0,0.1)$) {Chat};
+  \node[uc] (o6_0) at (18.6,-12.6) {Segnalazione dei contenuti};
+  \node[uc] (o6_1) at (18.6,-13.7) {Segnalazione profili};
+  \node[ucopt] (o6_2) at (18.6,-14.8) {Rilevamento automatico dei contenuti AI};
+  \node[uc] (o6_3) at (18.6,-15.9) {Moderazione dei contenuti};
+  \node[uc] (o6_4) at (18.6,-17.0) {Sospensione e ban account};
+  \begin{scope}[on background layer]
+  \node[sys,inner sep=4mm,fit=(o6_0) (o6_1) (o6_2) (o6_3) (o6_4)] (b6) {};
+  \end{scope}
+  \node[font=\small\bfseries,anchor=south] at ($(b6.north)+(0,0.1)$) {Sicurezza e moderazione};
+  \node[uc] (o7_0) at (27.9,-12.6) {Abbonamenti creators};
+  \begin{scope}[on background layer]
+  \node[sys,inner sep=4mm,fit=(o7_0)] (b7) {};
+  \end{scope}
+  \node[font=\small\bfseries,anchor=south] at ($(b7.north)+(0,0.1)$) {Monetizzazione};
+  \attore{pu}{15,-10}{Utente registrato}
+  \attore{pv}{-5.5,0.5}{Visitatore}
+  \attore{pc}{36,-14.5}{Creator}
+  \attore{pm}{36,-17.5}{Moderatore}
+  \attore{ps}{36,-11.5}{Sistema}
+  \draw[assoc] (pv) -- (o0_0);
+  \draw[assoc] (pu) -- (b0.south west);
+  \draw[assoc] (pu) -- (b1.south);
+  \draw[assoc] (pu) -- (b2.south);
+  \draw[assoc] (pu) -- (b3.south);
+  \draw[assoc] (pu) -- (b4.north west);
+  \draw[assoc] (pu) -- (b5.north);
+  \draw[assoc] (pu) -- (b6.north);
+  \draw[assoc] (pc) -- (o7_0);
+  \draw[assoc] (pm) -- (o6_3);
+  \draw[assoc] (pm) -- (o6_4);
+  \draw[assoc] (ps) -- (o6_2);
+  \node[font=\Large\bfseries] at (17,3.0) {wuxer --- Panoramica dei casi d'uso};
+  \node[uc,text width=0pt,minimum width=0.9cm,minimum height=0.5cm,fill=gray!30] (lgp) at (-3,-19.5) {}; \node[font=\small,right=2pt of lgp] {Fase 5 (opzionale)};
+  \node[font=\footnotesize,align=left,anchor=west] at (2,-19.5) {Una linea dall'Utente registrato verso un riquadro vale per tutti i suoi casi d'uso. Creator e Moderatore sono anche Utenti registrati.};
+\end{tikzpicture}
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \node[uc] (u0_0) at (0.0,0.0) {Registrazione/login};
+  \node[uc] (u0_1) at (0.0,-1.55) {Impostazione: parte legale};
+  \node[uc] (u0_2) at (0.0,-3.1) {Impostazione: account};
+  \node[uc] (u0_3) at (0.0,-4.65) {Impostazione: preferenze};
+  \node[uc] (u0_4) at (0.0,-6.2) {Impostazione: informazioni app e account};
+  \node[uc] (u0_5) at (0.0,-7.75) {Impostazione: utilizzo del tempo};
+  \node[uc] (u0_6) at (0.0,-9.3) {Impostazione: configurazione AI};
+  \attore{a0V}{-6.2,-3.1500000000000004}{Visitatore}
+  \attore{a0U}{-6.2,-6.15}{Utente registrato}
+  \begin{scope}[on background layer]
+  \node[sys,fit=(u0_0)(u0_1)(u0_2)(u0_3)(u0_4)(u0_5)(u0_6)] (box0) {};
+  \end{scope}
+  \node[font=\small\bfseries,anchor=north west] at ([shift={(2mm,-1mm)}]box0.north west) {wuxer};
+  \draw[assoc] (a0V) -- (u0_0);
+  \draw[assoc] (a0U) -- (u0_1);
+  \draw[assoc] (a0U) -- (u0_2);
+  \draw[assoc] (a0U) -- (u0_3);
+  \draw[assoc] (a0U) -- (u0_4);
+  \draw[assoc] (a0U) -- (u0_5);
+  \draw[assoc] (a0U) -- (u0_6);
+  \draw[ext] (u0_0) to[out=0,in=0,looseness=1.4] node[font=\scriptsize,fill=white,inner sep=1pt]{\texttt{<<include>>}} (u0_1);
+  \node[font=\Large\bfseries,anchor=south] at ($(box0.north)+(0,0.4)$) {Account, impostazioni e accesso};
+\end{tikzpicture}
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \node[uc] (u1_0) at (0.0,0.0) {Profilo};
+  \node[uc] (u1_1) at (0.0,-1.55) {Follow};
+  \node[uc] (u1_2) at (0.0,-3.1) {Blocco utenti};
+  \node[uc] (u1_3) at (0.0,-4.65) {Ricerca account};
+  \attore{a1U}{-6.2,-2.325}{Utente registrato}
+  \begin{scope}[on background layer]
+  \node[sys,fit=(u1_0)(u1_1)(u1_2)(u1_3)] (box1) {};
+  \end{scope}
+  \node[font=\small\bfseries,anchor=north west] at ([shift={(2mm,-1mm)}]box1.north west) {wuxer};
+  \draw[assoc] (a1U) -- (u1_0);
+  \draw[assoc] (a1U) -- (u1_1);
+  \draw[assoc] (a1U) -- (u1_2);
+  \draw[assoc] (a1U) -- (u1_3);
+  \node[font=\Large\bfseries,anchor=south] at ($(box1.north)+(0,0.4)$) {Profilo e relazioni tra utenti};
+\end{tikzpicture}
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \node[uc] (u2_0) at (0.0,0.0) {Pubblicazione storie};
+  \node[uc] (u2_1) at (0.0,-1.55) {Interazioni storie};
+  \node[ucopt] (u2_2) at (0.0,-3.1) {Categorie di utenti per le storie};
+  \node[ucopt] (u2_3) at (0.0,-4.65) {Video nelle storie};
+  \node[ucopt] (u2_4) at (0.0,-6.2) {Impostazione: chi può commentare le storie};
+  \attore{a2U}{-6.2,-3.1}{Utente registrato}
+  \begin{scope}[on background layer]
+  \node[sys,fit=(u2_0)(u2_1)(u2_2)(u2_3)(u2_4)] (box2) {};
+  \end{scope}
+  \node[font=\small\bfseries,anchor=north west] at ([shift={(2mm,-1mm)}]box2.north west) {wuxer};
+  \draw[assoc] (a2U) -- (u2_0);
+  \draw[assoc] (a2U) -- (u2_1);
+  \draw[assoc] (a2U) -- (u2_2);
+  \draw[assoc] (a2U) -- (u2_3);
+  \draw[assoc] (a2U) -- (u2_4);
+  \draw[ext] (u2_3) to[out=0,in=0,looseness=2.0] node[font=\scriptsize,fill=white,inner sep=1pt]{\texttt{<<extend>>}} (u2_0);
+  \draw[ext] (u2_2) to[out=0,in=0,looseness=1.7] node[font=\scriptsize,fill=white,inner sep=1pt]{\texttt{<<extend>>}} (u2_0);
+  \draw[ext] (u2_4) to[out=0,in=0,looseness=2.0] node[font=\scriptsize,fill=white,inner sep=1pt]{\texttt{<<extend>>}} (u2_1);
+  \node[font=\Large\bfseries,anchor=south] at ($(box2.north)+(0,0.4)$) {Contenuti: storie};
+  \node[uc,minimum width=0.9cm,minimum height=0.5cm,fill=gray!30,anchor=north west] (lg2) at ($(box2.south west)+(0,-0.3)$) {}; \node[font=\small,right=2pt of lg2] {Fase 5 (opzionale)};
+\end{tikzpicture}
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \node[uc] (u3_0) at (0.0,0.0) {Pubblicazione post};
+  \node[uc] (u3_1) at (0.0,-1.55) {Interazioni post};
+  \node[uc] (u3_2) at (0.0,-3.1) {Hashtag post};
+  \node[uc] (u3_3) at (0.0,-4.65) {Ricerca post};
+  \node[uc] (u3_4) at (0.0,-6.2) {Generazione suggerimenti AI nei post e nei video};
+  \node[uc] (u3_5) at (0.0,-7.75) {Pubblicazione video};
+  \node[uc] (u3_6) at (0.0,-9.3) {Interazioni video};
+  \attore{a3U}{-6.2,-4.65}{Utente registrato}
+  \begin{scope}[on background layer]
+  \node[sys,fit=(u3_0)(u3_1)(u3_2)(u3_3)(u3_4)(u3_5)(u3_6)] (box3) {};
+  \end{scope}
+  \node[font=\small\bfseries,anchor=north west] at ([shift={(2mm,-1mm)}]box3.north west) {wuxer};
+  \draw[assoc] (a3U) -- (u3_0);
+  \draw[assoc] (a3U) -- (u3_1);
+  \draw[assoc] (a3U) -- (u3_2);
+  \draw[assoc] (a3U) -- (u3_3);
+  \draw[assoc] (a3U) -- (u3_4);
+  \draw[assoc] (a3U) -- (u3_5);
+  \draw[assoc] (a3U) -- (u3_6);
+  \draw[ext] (u3_4) to[out=0,in=0,looseness=2.3] node[font=\scriptsize,fill=white,inner sep=1pt]{\texttt{<<extend>>}} (u3_0);
+  \draw[ext] (u3_4) to[out=0,in=0,looseness=1.4] node[font=\scriptsize,fill=white,inner sep=1pt]{\texttt{<<extend>>}} (u3_5);
+  \node[font=\Large\bfseries,anchor=south] at ($(box3.north)+(0,0.4)$) {Contenuti: post e video};
+\end{tikzpicture}
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \node[uc] (u4_0) at (0.0,0.0) {Feed};
+  \node[uc] (u4_1) at (0.0,-1.55) {Feed profili seguiti};
+  \node[uc] (u4_2) at (0.0,-3.1) {Visualizzazione tendenza};
+  \node[uc] (u4_3) at (0.0,-4.65) {Notifiche};
+  \attore{a4U}{-6.2,-2.325}{Utente registrato}
+  \begin{scope}[on background layer]
+  \node[sys,fit=(u4_0)(u4_1)(u4_2)(u4_3)] (box4) {};
+  \end{scope}
+  \node[font=\small\bfseries,anchor=north west] at ([shift={(2mm,-1mm)}]box4.north west) {wuxer};
+  \draw[assoc] (a4U) -- (u4_0);
+  \draw[assoc] (a4U) -- (u4_1);
+  \draw[assoc] (a4U) -- (u4_2);
+  \draw[assoc] (a4U) -- (u4_3);
+  \node[font=\Large\bfseries,anchor=south] at ($(box4.north)+(0,0.4)$) {Feed, tendenze e notifiche};
+\end{tikzpicture}
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \node[uc] (u5_0) at (0.0,0.0) {Chat private};
+  \node[uc] (u5_1) at (0.0,-1.55) {Chat di gruppo};
+  \node[ucopt] (u5_2) at (0.0,-3.1) {Allegati nelle chat private};
+  \attore{a5U}{-6.2,-1.55}{Utente registrato}
+  \begin{scope}[on background layer]
+  \node[sys,fit=(u5_0)(u5_1)(u5_2)] (box5) {};
+  \end{scope}
+  \node[font=\small\bfseries,anchor=north west] at ([shift={(2mm,-1mm)}]box5.north west) {wuxer};
+  \draw[assoc] (a5U) -- (u5_0);
+  \draw[assoc] (a5U) -- (u5_1);
+  \draw[assoc] (a5U) -- (u5_2);
+  \draw[ext] (u5_2) to[out=0,in=0,looseness=1.7] node[font=\scriptsize,fill=white,inner sep=1pt]{\texttt{<<extend>>}} (u5_0);
+  \node[font=\Large\bfseries,anchor=south] at ($(box5.north)+(0,0.4)$) {Chat};
+  \node[uc,minimum width=0.9cm,minimum height=0.5cm,fill=gray!30,anchor=north west] (lg5) at ($(box5.south west)+(0,-0.3)$) {}; \node[font=\small,right=2pt of lg5] {Fase 5 (opzionale)};
+\end{tikzpicture}
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \node[uc] (u6_0) at (0.0,0.0) {Segnalazione dei contenuti};
+  \node[uc] (u6_1) at (0.0,-1.55) {Segnalazione profili};
+  \node[uc] (u6_2) at (0.0,-3.1) {Moderazione dei contenuti};
+  \node[uc] (u6_3) at (0.0,-4.65) {Sospensione e ban account};
+  \node[ucopt] (u6_4) at (0.0,-6.2) {Rilevamento automatico dei contenuti AI};
+  \attore{a6U}{-6.2,-3.1}{Utente registrato}
+  \attore{a6M}{6.2,-1.6}{Moderatore}
+  \attore{a6S}{6.2,-4.6}{Sistema}
+  \begin{scope}[on background layer]
+  \node[sys,fit=(u6_0)(u6_1)(u6_2)(u6_3)(u6_4)] (box6) {};
+  \end{scope}
+  \node[font=\small\bfseries,anchor=north west] at ([shift={(2mm,-1mm)}]box6.north west) {wuxer};
+  \draw[assoc] (a6U) -- (u6_0);
+  \draw[assoc] (a6U) -- (u6_1);
+  \draw[assoc] (a6M) -- (u6_2);
+  \draw[assoc] (a6M) -- (u6_3);
+  \draw[assoc] (a6S) -- (u6_4);
+  \draw[assoc] (a6U) -- (u6_4);
+  \node[font=\Large\bfseries,anchor=south] at ($(box6.north)+(0,0.4)$) {Sicurezza e moderazione};
+  \node[uc,minimum width=0.9cm,minimum height=0.5cm,fill=gray!30,anchor=north west] (lg6) at ($(box6.south west)+(0,-0.3)$) {}; \node[font=\small,right=2pt of lg6] {Fase 5 (opzionale)};
+\end{tikzpicture}
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \node[uc] (u7_0) at (0.0,0.0) {Abbonamenti creators};
+  \attore{a7C}{-6.2,0.0}{Creator}
+  \begin{scope}[on background layer]
+  \node[sys,fit=(u7_0)] (box7) {};
+  \end{scope}
+  \node[font=\small\bfseries,anchor=north west] at ([shift={(2mm,-1mm)}]box7.north west) {wuxer};
+  \draw[assoc] (a7C) -- (u7_0);
+  \node[font=\Large\bfseries,anchor=south] at ($(box7.north)+(0,0.4)$) {Monetizzazione};
+\end{tikzpicture}
+\end{document}
