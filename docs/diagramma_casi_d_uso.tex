@@ -31,17 +31,17 @@
 \begin{document}
 \begin{tikzpicture}[x=1cm,y=1cm]
   \tikzset{desc/.style={align=center,font=\small,text width=5.6cm,anchor=south}}
-  \node[font=\Large\bfseries] at (0,6.2) {wuxer --- Attori};
+  \node[font=\Large\bfseries] at (0,5.2) {Wuxer - Attori};
   \attore{vis}{-7,2}{Visitatore}
   \attore{ute}{0,2}{Utente registrato}
   \attore{sis}{7,2}{Sistema}
   \attore{cre}{-3.6,-3.2}{Creator}
   \attore{mod}{3.6,-3.2}{Moderatore}
-  \node[desc] at (-7,3.4) {Chi non ha un account: vede solo homepage e login e pu\`o registrarsi.};
-  \node[desc] at (0,3.4) {Usa tutte le funzionalit\`a social.};
-  \node[desc] at (7,3.4) {Attore non umano: rileva i contenuti generati da AI.};
-  \node[desc,anchor=north] at (-3.6,-4.9) {Utente con un abbonamento \textit{wuxer pro} o \textit{wuxer max}, venduto da wuxer.};
-  \node[desc,anchor=north] at (3.6,-4.9) {Nominato dall'amministratore dell'app: esamina segnalazioni e sanziona.};
+  \node[desc] at (-7,2.8) {Chi non ha un account: vede solo homepage e login e pu\`o registrarsi.};
+  \node[desc] at (0,2.8) {Usa tutte le funzionalit\`a social.};
+  \node[desc] at (7,2.8) {Attore non umano: rileva i contenuti generati da AI.};
+  \node[desc,anchor=north] at (-3.6,-4.3) {Utente con un abbonamento \textit{wuxer pro} o \textit{wuxer max}, venduto da wuxer.};
+  \node[desc,anchor=north] at (3.6,-4.3) {Nominato dall'amministratore dell'app: esamina segnalazioni e sanziona.};
   \draw[gen] (cre.north) -- ++(0,1.0) -| (0,0.55);
   \draw[gen] (mod.north) -- ++(0,1.0) -| (0,0.55);
 \end{tikzpicture}
@@ -69,7 +69,7 @@
   \node[uc] (o2_0) at (18.6,0.0) {Pubblicazione storie};
   \node[uc] (o2_1) at (18.6,-1.1) {Interazioni storie};
   \node[ucopt] (o2_2) at (18.6,-2.2) {Categorie di utenti per le storie};
-  \node[ucopt] (o2_3) at (18.6,-3.3000000000000003) {Video nelle storie};
+  \node[ucopt] (o2_3) at (18.6,-3.3) {Video nelle storie};
   \node[ucopt] (o2_4) at (18.6,-4.4) {Impostazione: chi può commentare le storie};
   \begin{scope}[on background layer]
   \node[sys,inner sep=4mm,fit=(o2_0) (o2_1) (o2_2) (o2_3) (o2_4)] (b2) {};
@@ -115,11 +115,11 @@
   \node[sys,inner sep=4mm,fit=(o7_0)] (b7) {};
   \end{scope}
   \node[font=\small\bfseries,anchor=south] at ($(b7.north)+(0,0.1)$) {Monetizzazione};
-  \attore{pu}{15,-10}{Utente registrato}
+  \attore{pu}{13,-9}{Utente registrato}
   \attore{pv}{-5.5,0.5}{Visitatore}
-  \attore{pc}{36,-14.5}{Creator}
-  \attore{pm}{36,-17.5}{Moderatore}
-  \attore{ps}{36,-11.5}{Sistema}
+  \attore{pc}{34,-12.5}{Creator}
+  \attore{pm}{34,-16.5}{Moderatore}
+  \attore{ps}{34,-14.5}{Sistema}
   \draw[assoc] (pv) -- (o0_0);
   \draw[assoc] (pu) -- (b0.south west);
   \draw[assoc] (pu) -- (b1.south);
@@ -132,9 +132,9 @@
   \draw[assoc] (pm) -- (o6_3);
   \draw[assoc] (pm) -- (o6_4);
   \draw[assoc] (ps) -- (o6_2);
-  \node[font=\Large\bfseries] at (17,3.0) {wuxer --- Panoramica dei casi d'uso};
-  \node[uc,text width=0pt,minimum width=0.9cm,minimum height=0.5cm,fill=gray!30] (lgp) at (-3,-19.5) {}; \node[font=\small,right=2pt of lgp] {Fase 5 (opzionale)};
-  \node[font=\footnotesize,align=left,anchor=west] at (2,-19.5) {Una linea dall'Utente registrato verso un riquadro vale per tutti i suoi casi d'uso. Creator e Moderatore sono anche Utenti registrati.};
+  \node[font=\Large\bfseries] at (17,3.0) {Wuxer - Panoramica dei casi d'uso};
+  \node[uc,text width=0pt,minimum width=0.9cm,minimum height=0.5cm,fill=gray!30] (lgp) at (-3,-19) {}; \node[font=\small,right=2pt of lgp] {Fase 5 (opzionale)};
+  \node[font=\footnotesize,align=left,anchor=west] at (2,-19) {Una linea dall'Utente registrato verso un riquadro vale per tutti i suoi casi d'uso. Creator e Moderatore sono anche Utenti registrati.};
 \end{tikzpicture}
 \begin{tikzpicture}[x=1cm,y=1cm]
   \node[uc] (u0_0) at (0.0,0.0) {Registrazione/login};
@@ -144,12 +144,12 @@
   \node[uc] (u0_4) at (0.0,-6.2) {Impostazione: informazioni app e account};
   \node[uc] (u0_5) at (0.0,-7.75) {Impostazione: utilizzo del tempo};
   \node[uc] (u0_6) at (0.0,-9.3) {Impostazione: configurazione AI};
-  \attore{a0V}{-6.2,-3.1500000000000004}{Visitatore}
-  \attore{a0U}{-6.2,-6.15}{Utente registrato}
+  \attore{a0V}{-7.2,0}{Visitatore}
+  \attore{a0U}{-7.2,-6}{Utente registrato}
   \begin{scope}[on background layer]
   \node[sys,fit=(u0_0)(u0_1)(u0_2)(u0_3)(u0_4)(u0_5)(u0_6)] (box0) {};
   \end{scope}
-  \node[font=\small\bfseries,anchor=north west] at ([shift={(2mm,-1mm)}]box0.north west) {wuxer};
+  \node[font=\small\bfseries,anchor=north west] at ([shift={(2mm,-1mm)}]box0.north west) {Wuxer};
   \draw[assoc] (a0V) -- (u0_0);
   \draw[assoc] (a0U) -- (u0_1);
   \draw[assoc] (a0U) -- (u0_2);
@@ -165,11 +165,11 @@
   \node[uc] (u1_1) at (0.0,-1.55) {Follow};
   \node[uc] (u1_2) at (0.0,-3.1) {Blocco utenti};
   \node[uc] (u1_3) at (0.0,-4.65) {Ricerca account};
-  \attore{a1U}{-6.2,-2.325}{Utente registrato}
+  \attore{a1U}{-6,-2}{Utente registrato}
   \begin{scope}[on background layer]
   \node[sys,fit=(u1_0)(u1_1)(u1_2)(u1_3)] (box1) {};
   \end{scope}
-  \node[font=\small\bfseries,anchor=north west] at ([shift={(2mm,-1mm)}]box1.north west) {wuxer};
+  \node[font=\small\bfseries,anchor=north west] at ([shift={(2mm,-1mm)}]box1.north west) {Wuxer};
   \draw[assoc] (a1U) -- (u1_0);
   \draw[assoc] (a1U) -- (u1_1);
   \draw[assoc] (a1U) -- (u1_2);
@@ -182,11 +182,11 @@
   \node[ucopt] (u2_2) at (0.0,-3.1) {Categorie di utenti per le storie};
   \node[ucopt] (u2_3) at (0.0,-4.65) {Video nelle storie};
   \node[ucopt] (u2_4) at (0.0,-6.2) {Impostazione: chi può commentare le storie};
-  \attore{a2U}{-6.2,-3.1}{Utente registrato}
+  \attore{a2U}{-7,-3}{Utente registrato}
   \begin{scope}[on background layer]
   \node[sys,fit=(u2_0)(u2_1)(u2_2)(u2_3)(u2_4)] (box2) {};
   \end{scope}
-  \node[font=\small\bfseries,anchor=north west] at ([shift={(2mm,-1mm)}]box2.north west) {wuxer};
+  \node[font=\small\bfseries,anchor=north west] at ([shift={(2mm,-1mm)}]box2.north west) {Wuxer};
   \draw[assoc] (a2U) -- (u2_0);
   \draw[assoc] (a2U) -- (u2_1);
   \draw[assoc] (a2U) -- (u2_2);
@@ -206,11 +206,11 @@
   \node[uc] (u3_4) at (0.0,-6.2) {Generazione suggerimenti AI nei post e nei video};
   \node[uc] (u3_5) at (0.0,-7.75) {Pubblicazione video};
   \node[uc] (u3_6) at (0.0,-9.3) {Interazioni video};
-  \attore{a3U}{-6.2,-4.65}{Utente registrato}
+  \attore{a3U}{-7.5,-6}{Utente registrato}
   \begin{scope}[on background layer]
   \node[sys,fit=(u3_0)(u3_1)(u3_2)(u3_3)(u3_4)(u3_5)(u3_6)] (box3) {};
   \end{scope}
-  \node[font=\small\bfseries,anchor=north west] at ([shift={(2mm,-1mm)}]box3.north west) {wuxer};
+  \node[font=\small\bfseries,anchor=north west] at ([shift={(2mm,-1mm)}]box3.north west) {Wuxer};
   \draw[assoc] (a3U) -- (u3_0);
   \draw[assoc] (a3U) -- (u3_1);
   \draw[assoc] (a3U) -- (u3_2);
@@ -218,7 +218,7 @@
   \draw[assoc] (a3U) -- (u3_4);
   \draw[assoc] (a3U) -- (u3_5);
   \draw[assoc] (a3U) -- (u3_6);
-  \draw[ext] (u3_4) to[out=0,in=0,looseness=2.3] node[font=\scriptsize,fill=white,inner sep=1pt]{\texttt{<<extend>>}} (u3_0);
+  \draw[ext] (u3_4) to[out=0,in=0,looseness=1] node[font=\scriptsize,fill=white,inner sep=1pt]{\texttt{<<extend>>}} (u3_0);
   \draw[ext] (u3_4) to[out=0,in=0,looseness=1.4] node[font=\scriptsize,fill=white,inner sep=1pt]{\texttt{<<extend>>}} (u3_5);
   \node[font=\Large\bfseries,anchor=south] at ($(box3.north)+(0,0.4)$) {Contenuti: post e video};
 \end{tikzpicture}
@@ -227,11 +227,11 @@
   \node[uc] (u4_1) at (0.0,-1.55) {Feed profili seguiti};
   \node[uc] (u4_2) at (0.0,-3.1) {Visualizzazione tendenza};
   \node[uc] (u4_3) at (0.0,-4.65) {Notifiche};
-  \attore{a4U}{-6.2,-2.325}{Utente registrato}
+  \attore{a4U}{-6,-2}{Utente registrato}
   \begin{scope}[on background layer]
   \node[sys,fit=(u4_0)(u4_1)(u4_2)(u4_3)] (box4) {};
   \end{scope}
-  \node[font=\small\bfseries,anchor=north west] at ([shift={(2mm,-1mm)}]box4.north west) {wuxer};
+  \node[font=\small\bfseries,anchor=north west] at ([shift={(2mm,-1mm)}]box4.north west) {Wuxer};
   \draw[assoc] (a4U) -- (u4_0);
   \draw[assoc] (a4U) -- (u4_1);
   \draw[assoc] (a4U) -- (u4_2);
@@ -242,15 +242,15 @@
   \node[uc] (u5_0) at (0.0,0.0) {Chat private};
   \node[uc] (u5_1) at (0.0,-1.55) {Chat di gruppo};
   \node[ucopt] (u5_2) at (0.0,-3.1) {Allegati nelle chat private};
-  \attore{a5U}{-6.2,-1.55}{Utente registrato}
+  \attore{a5U}{-5.5,-1.5}{Utente registrato}
   \begin{scope}[on background layer]
   \node[sys,fit=(u5_0)(u5_1)(u5_2)] (box5) {};
   \end{scope}
-  \node[font=\small\bfseries,anchor=north west] at ([shift={(2mm,-1mm)}]box5.north west) {wuxer};
+  \node[font=\small\bfseries,anchor=north west] at ([shift={(2mm,-1mm)}]box5.north west) {Wuxer};
   \draw[assoc] (a5U) -- (u5_0);
   \draw[assoc] (a5U) -- (u5_1);
   \draw[assoc] (a5U) -- (u5_2);
-  \draw[ext] (u5_2) to[out=0,in=0,looseness=1.7] node[font=\scriptsize,fill=white,inner sep=1pt]{\texttt{<<extend>>}} (u5_0);
+  \draw[ext] (u5_2) to[out=0,in=0,looseness=1.5] node[font=\scriptsize,fill=white,inner sep=1pt]{\texttt{<<extend>>}} (u5_0);
   \node[font=\Large\bfseries,anchor=south] at ($(box5.north)+(0,0.4)$) {Chat};
   \node[uc,minimum width=0.9cm,minimum height=0.5cm,fill=gray!30,anchor=north west] (lg5) at ($(box5.south west)+(0,-0.3)$) {}; \node[font=\small,right=2pt of lg5] {Fase 5 (opzionale)};
 \end{tikzpicture}
@@ -260,13 +260,13 @@
   \node[uc] (u6_2) at (0.0,-3.1) {Moderazione dei contenuti};
   \node[uc] (u6_3) at (0.0,-4.65) {Sospensione e ban account};
   \node[ucopt] (u6_4) at (0.0,-6.2) {Rilevamento automatico dei contenuti AI};
-  \attore{a6U}{-6.2,-3.1}{Utente registrato}
-  \attore{a6M}{6.2,-1.6}{Moderatore}
-  \attore{a6S}{6.2,-4.6}{Sistema}
+  \attore{a6U}{-6.5,-3.5}{Utente registrato}
+  \attore{a6M}{6,-3}{Moderatore}
+  \attore{a6S}{6,-6}{Sistema}
   \begin{scope}[on background layer]
   \node[sys,fit=(u6_0)(u6_1)(u6_2)(u6_3)(u6_4)] (box6) {};
   \end{scope}
-  \node[font=\small\bfseries,anchor=north west] at ([shift={(2mm,-1mm)}]box6.north west) {wuxer};
+  \node[font=\small\bfseries,anchor=north west] at ([shift={(2mm,-1mm)}]box6.north west) {Wuxer};
   \draw[assoc] (a6U) -- (u6_0);
   \draw[assoc] (a6U) -- (u6_1);
   \draw[assoc] (a6M) -- (u6_2);
@@ -278,11 +278,11 @@
 \end{tikzpicture}
 \begin{tikzpicture}[x=1cm,y=1cm]
   \node[uc] (u7_0) at (0.0,0.0) {Abbonamenti creators};
-  \attore{a7C}{-6.2,0.0}{Creator}
+  \attore{a7C}{-5,0.0}{Creator}
   \begin{scope}[on background layer]
   \node[sys,fit=(u7_0)] (box7) {};
   \end{scope}
-  \node[font=\small\bfseries,anchor=north west] at ([shift={(2mm,-1mm)}]box7.north west) {wuxer};
+  \node[font=\small\bfseries,anchor=north west] at ([shift={(2mm,-1mm)}]box7.north west) {Wuxer};
   \draw[assoc] (a7C) -- (u7_0);
   \node[font=\Large\bfseries,anchor=south] at ($(box7.north)+(0,0.4)$) {Monetizzazione};
 \end{tikzpicture}
