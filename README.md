@@ -79,6 +79,84 @@
 | I vantaggi di un abbonamento sono fruibili dagli abbonati attivi | Regola di business | Abbonamenti creators |
 | L'applicazione non deve mostrare pubblicità agli utenti | Regola di business | Tutte |
 
+## Diagramma dei casi d'uso
+
+### Attori
+
+![Attori di Wuxer](./docs/diagrammi/attori.svg)
+
+---
+
+### Panoramica
+
+![Panoramica dei casi d'uso di Wuxer](./docs/diagrammi/panoramica.svg)
+
+---
+
+### Dettaglio per area
+
+<details>
+<summary>Account, impostazioni e accesso</summary>
+
+![Casi d'uso: account, impostazioni e accesso](./docs/diagrammi/account-impostazioni-accesso.svg)
+
+</details>
+
+<details>
+<summary>Profilo e relazioni tra utenti</summary>
+
+![Casi d'uso: profilo e relazioni tra utenti](./docs/diagrammi/profilo.svg)
+
+</details>
+
+<details>
+<summary>Contenuti: storie</summary>
+
+![Casi d'uso: storie](./docs/diagrammi/storie.svg)
+
+</details>
+
+<details>
+<summary>Contenuti: post e video</summary>
+
+![Casi d'uso: post e video](./docs/diagrammi/post-video.svg)
+
+</details>
+
+<details>
+<summary>Feed, tendenze e notifiche</summary>
+
+![Casi d'uso: feed, tendenze e notifiche](./docs/diagrammi/feed-tendenze-notifiche.svg)
+
+</details>
+
+<details>
+<summary>Chat</summary>
+
+![Casi d'uso: chat](./docs/diagrammi/chat.svg)
+
+</details>
+
+<details>
+<summary>Sicurezza e moderazione</summary>
+
+![Casi d'uso: sicurezza e moderazione](./docs/diagrammi/moderazione.svg)
+
+</details>
+
+<details>
+<summary>Monetizzazione</summary>
+
+![Casi d'uso: monetizzazione](./docs/diagrammi/monetizzazione.svg)
+
+</details>
+
+## User story
+
+Le user story descrivono le funzionalità dal punto di vista dell'utente e sono scritte nel formato `Come [utente], Voglio [funzionalità], In modo da [beneficio]`. Ognuna ha dei criteri di accettazione scritti come scenari con `DATO, QUANDO, ALLORA` compresi i casi di errore.
+
+[Consulta le user story](./docs/USER_STORY.md)
+
 ## Analisi SWOT
 
 |  | Positivo | Negativo |

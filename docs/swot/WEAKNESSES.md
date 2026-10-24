@@ -1,4 +1,4 @@
-# WUXER - Punti di debolezza
+# Wuxer - Punti di debolezza
 
 - Tempo di sviluppo limitato dai vincoli di un progetto scolastico, che riduce lo spazio per test approfonditi
 - Nessuna base utenti reale: mancano dati concreti per validare le ipotesi su feed, tendenze e abbonamenti

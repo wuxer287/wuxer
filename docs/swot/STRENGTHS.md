@@ -1,4 +1,4 @@
-- # WUXER - Punti di forza
+- # Wuxer - Punti di forza
 
 - Team con competenze su frontend, backend e database SQL, che coprono l'intero stack necessario (tecnologie ancora da scegliere)
 - Funzionalità "Impostazione: utilizzo del tempo" (Fase 3) come elemento distintivo rispetto a Instagram, TikTok e X, che non offrono un controllo nativo paragonabile

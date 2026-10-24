@@ -136,6 +136,7 @@
   \draw[assoc] (pm) -- (o6_3);
   \draw[assoc] (pm) -- (o6_4);
   \draw[assoc] (pm) -- (o6_5);
+  \draw[assoc] (pm) -- (o6_2);
   \draw[assoc] (ps) -- (o6_2);
   \node[font=\Large\bfseries] at (17,3.0) {Wuxer - Panoramica dei casi d'uso};
   \node[uc,text width=0pt,minimum width=0.9cm,minimum height=0.5cm,fill=gray!30] (lgp) at (-3,-21.5) {}; \node[font=\small,right=2pt of lgp] {Fase 5 (opzionale)};
@@ -270,7 +271,7 @@
   \node[uc] (u6_4) at (0.0,-6.20) {Bannare un account};
   \node[ucopt] (u6_5) at (0.0,-7.75) {Rilevare i contenuti generati da AI};
   \attore{a6U}{-6.5,-3.9}{Utente registrato}
-  \attore{a6M}{5.5,-4.5}{Moderatore}
+  \attore{a6M}{5.5,-5.5}{Moderatore}
   \attore{a6S}{5.5,-8}{Sistema}
   \begin{scope}[on background layer]
   \node[sys,fit=(u6_0)(u6_1)(u6_2)(u6_3)(u6_4)(u6_5)] (box6) {};
@@ -281,6 +282,7 @@
   \draw[assoc] (a6M) -- (u6_2);
   \draw[assoc] (a6M) -- (u6_3);
   \draw[assoc] (a6M) -- (u6_4);
+  \draw[assoc] (a6M) -- (u6_5);
   \draw[assoc] (a6S) -- (u6_5);
   \draw[assoc] (a6U) -- (u6_5);
   \node[font=\Large\bfseries,anchor=south] at ($(box6.north)+(0,0.4)$) {Sicurezza e moderazione};

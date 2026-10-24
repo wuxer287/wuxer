@@ -1,4 +1,4 @@
-# WUXER - Minacce
+# Wuxer - Minacce
 
 - Mercato dominato da piattaforme consolidate (Instagram, TikTok, X, Snapchat) con risorse e base utenti enormemente superiori
 - Difficoltà a raggiungere una massa critica di utenti, essenziale per funzionalità come feed, tendenze e abbonamenti wuxer

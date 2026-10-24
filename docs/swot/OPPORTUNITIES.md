@@ -1,4 +1,4 @@
-# WUXER - Opportunità
+# Wuxer - Opportunità
 
 - Crescente attenzione degli utenti, soprattutto giovani, al benessere digitale e al controllo del tempo trascorso sui social (funzione "utilizzo del tempo", Fase 3)
 - Possibilità di differenziarsi con un controllo del tempo integrato e personalizzabile

@@ -1,4 +1,4 @@
-# WUXER - User story
+# Wuxer - User story
 
 TITOLO: Registrazione/login
 
