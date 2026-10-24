@@ -21,7 +21,7 @@ CRITERI DI ACCETTAZIONE:
 - Scenario 3: Registrazione bloccata per età
   - **DATO** che dalla data di nascita indicata l'utente ha meno di 14 anni
   - **QUANDO** l'utente tenta di registrarsi
-  - **ALLORA** il sistema blocca la registrazione
+  - **ALLORA** il sistema blocca la registrazione e mostra un messaggio che ne spiega il motivo e indica i termini di servizio da consultare
 
 - Scenario 4: Data di nascita mancante
   - **DATO** che l'utente sta compilando la registrazione
@@ -52,6 +52,11 @@ CRITERI DI ACCETTAZIONE:
   - **DATO** che l'utente ha ricevuto il codice di verifica via email
   - **QUANDO** l'utente inserisce un codice errato o scaduto
   - **ALLORA** il sistema non crea l'account e permette di richiedere un nuovo codice
+
+- Scenario 10: Scelta dei dati dopo la verifica
+  - **DATO** che l'utente ha inserito il codice di verifica corretto
+  - **QUANDO** l'utente sceglie nome utente, nome visualizzato e data di nascita
+  - **ALLORA** il sistema completa la registrazione e permette di aggiungere foto e biografia in seguito dal profilo
 
 ---
 
@@ -1383,6 +1388,16 @@ CRITERI DI ACCETTAZIONE:
   - **QUANDO** il sistema rileva che il contenuto è stato generato da AI o contiene contenuti AI
   - **ALLORA** il sistema lo indica come generato da AI, avvisa l'autore, registra uno strike a suo carico e applica le sanzioni previste
 
+- Scenario 5: Contestazione del rilevamento
+  - **DATO** che il sistema ha indicato un contenuto come generato da AI
+  - **QUANDO** l'autore ritiene che il rilevamento sia sbagliato e lo contesta
+  - **ALLORA** il sistema registra la contestazione e la sottopone a un moderatore con la stessa procedura delle contestazioni sulle rimozioni
+
+- Scenario 6: Contestazione accolta
+  - **DATO** che il moderatore accoglie la contestazione dell'autore
+  - **QUANDO** la decisione viene registrata
+  - **ALLORA** il sistema toglie l'etichetta di contenuto generato da AI e annulla lo strike
+
 ---
 
 TITOLO: Categorie di utenti per le storie
@@ -1395,7 +1410,7 @@ USER STORY:
 CRITERI DI ACCETTAZIONE:
 - Scenario 1: Scelta della categoria
   - **DATO** che l'utente sta pubblicando una storia
-  - **QUANDO** l'utente sceglie una categoria di utenti (ad esempio tutti o solo i follower) e pubblica
+  - **QUANDO** l'utente sceglie una categoria di utenti (tutti, follower o amici stretti) e pubblica
   - **ALLORA** il sistema mostra la storia solo a quella categoria
 
 - Scenario 2: Utente fuori dalla categoria
@@ -1407,6 +1422,21 @@ CRITERI DI ACCETTAZIONE:
   - **DATO** che l'utente non sceglie alcuna categoria
   - **QUANDO** l'utente pubblica la storia
   - **ALLORA** il sistema applica la visibilità del profilo, pubblico o privato
+
+- Scenario 4: Creazione della lista degli amici stretti
+  - **DATO** che l'utente ha dei follower
+  - **QUANDO** l'utente aggiunge o toglie dei follower dalla lista degli amici stretti
+  - **ALLORA** il sistema aggiorna la lista e la usa per le storie riservate agli amici stretti
+
+- Scenario 5: Indicatore degli amici stretti
+  - **DATO** che una storia è riservata agli amici stretti
+  - **QUANDO** un amico stretto la guarda
+  - **ALLORA** il sistema mostra un indicatore sulla storia, che nessun altro utente vede
+
+- Scenario 6: Profilo privato
+  - **DATO** che il profilo dell'utente è privato
+  - **QUANDO** l'utente sceglie la categoria della storia
+  - **ALLORA** il sistema offre solo le categorie follower e amici stretti
 
 ---
 
@@ -1420,17 +1450,17 @@ USER STORY:
 CRITERI DI ACCETTAZIONE:
 - Scenario 1: Storia con video
   - **DATO** che l'utente ha effettuato l'accesso
-  - **QUANDO** l'utente carica un video e pubblica la storia
+  - **QUANDO** l'utente carica un video fino a 15 secondi, in formato MP4 o MOV e fino a 100 MB, e pubblica la storia
   - **ALLORA** il sistema pubblica la storia con il video
 
 - Scenario 2: Scadenza della storia video
   - **DATO** che esiste una storia con video
   - **QUANDO** passano 24 ore dalla pubblicazione
-  - **ALLORA** il sistema la fa sparire come le altre storie
+  - **ALLORA** il sistema la fa sparire come le altre storie; l'autore può anche archiviarla, come le altre storie
 
 - Scenario 3: Video non valido
   - **DATO** che l'utente sta caricando un video per una storia
-  - **QUANDO** il file non rispetta durata, formato o dimensione ammessi
+  - **QUANDO** il video dura più di 15 secondi, non è in formato MP4 o MOV oppure supera i 100 MB
   - **ALLORA** il sistema rifiuta il caricamento e indica i limiti
 
 ---
@@ -1464,18 +1494,18 @@ TITOLO: Allegati nelle chat private
 
 USER STORY:
 **Come** Utente registrato,
-**Voglio** inviare immagini e altri allegati nelle chat private,
+**Voglio** inviare immagini nelle chat private,
 **In modo da** comunicare con gli altri utenti in modo più completo.
 
 CRITERI DI ACCETTAZIONE:
 - Scenario 1: Invio di un allegato
   - **DATO** che l'utente è in una chat privata
-  - **QUANDO** l'utente invia un'immagine o un altro allegato
+  - **QUANDO** l'utente invia un'immagine
   - **ALLORA** il sistema lo cifra end-to-end e lo consegna al destinatario
 
 - Scenario 2: Allegato non valido
   - **DATO** che l'utente sta inviando un allegato
-  - **QUANDO** il file ha un formato non ammesso o è troppo grande
+  - **QUANDO** il file non è un'immagine oppure supera i 10 MB
   - **ALLORA** il sistema non lo invia e indica i limiti
 
 - Scenario 3: Eliminazione di un allegato

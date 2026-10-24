@@ -41,7 +41,7 @@
 | Il sistema deve permettere all'utente di scegliere quali categorie di utenti possono vedere una storia | Utenti | Categorie di utenti per le storie |
 | Il sistema deve permettere all'utente di pubblicare una storia con video | Utenti | Video nelle storie |
 | Il sistema deve permettere all'utente di scegliere chi può commentare le proprie storie | Utenti | Impostazione: chi può commentare le storie |
-| Il sistema deve permettere a due utenti di scambiarsi immagini e altri allegati nelle chat private | Utenti | Allegati nelle chat private |
+| Il sistema deve permettere a due utenti di scambiarsi immagini nelle chat private | Utenti | Allegati nelle chat private |
 
 ---
 
