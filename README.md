@@ -164,6 +164,14 @@ Le user story descrivono le funzionalità dal punto di vista dell'utente e sono 
 | Interni | [**Punti di forza**](./docs/swot/STRENGTHS.md) | [**Punti di debolezza**](./docs/swot/WEAKNESSES.md) |
 | Esterni | [**Opportunità**](./docs/swot/OPPORTUNITIES.md) | [**Minacce**](./docs/swot/THREATS.md) |
 
+## Stack tecnologico
+
+| Componente | Tecnologia |
+| :---: | :---: |
+| Backend / API | Golang + gin |
+| Web | React + Vite + TypeScript |
+| Mobile | Kotlin + Swift |
+
 ## Piano di sviluppo
 
 ### CRITERI
