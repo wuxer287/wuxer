@@ -811,7 +811,7 @@ CRITERI DI ACCETTAZIONE:
 - Scenario 4: Visitatore senza account
   - **DATO** che il visitatore non ha un account
   - **QUANDO** il visitatore apre l'app
-  - **ALLORA** il sistema mostra solo la homepage e il login, senza alcuna informazione sull'app o sugli account
+  - **ALLORA** il sistema mostra solo la homepage e il login
 
 - Scenario 5: Informazioni non modificabili
   - **DATO** che l'utente sta consultando le informazioni sull'app o sull'account
